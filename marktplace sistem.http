@@ -1,0 +1,6 @@
+@marktplace_sistem_HostAddress = http://localhost:5251
+
+GET {{marktplace_sistem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

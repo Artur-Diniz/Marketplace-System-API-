@@ -1,0 +1,33 @@
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\appsettings.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\marktplace sistem.exe
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\marktplace sistem.deps.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\marktplace sistem.runtimeconfig.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\marktplace sistem.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\marktplace sistem.pdb
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.csproj.AssemblyReference.cache
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.AssemblyInfoInputs.cache
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.AssemblyInfo.cs
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.csproj.CoreCompileInputs.cache
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\staticwebassets\msbuild.marktplace sistem.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\staticwebassets\msbuild.build.marktplace sistem.props
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.marktplace sistem.props
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.marktplace sistem.props
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\scopedcss\bundle\marktplace sistem.styles.css
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktpla.A9B81D93.Up2Date
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\refint\marktplace sistem.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.pdb
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.genruntimeconfig.cache
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\ref\marktplace sistem.dll
