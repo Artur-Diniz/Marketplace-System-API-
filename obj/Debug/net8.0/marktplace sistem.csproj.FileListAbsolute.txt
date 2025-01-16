@@ -168,3 +168,8 @@ C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\
 C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.pdb
 C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\marktplace sistem.genruntimeconfig.cache
 C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\obj\Debug\net8.0\ref\marktplace sistem.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\publish\web.config
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\publish\appsettings.Development.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\publish\appsettings.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\publish\marktplace sistem.deps.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\publish\marktplace sistem.runtimeconfig.json

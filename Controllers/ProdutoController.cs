@@ -1,5 +1,7 @@
+using marktplace_sistem.Data;
 using marktplace_sistem.models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace marktplace_sistem.Controllers
 {
@@ -7,68 +9,119 @@ namespace marktplace_sistem.Controllers
     [Route("Produtos")]
     public class ProdutoController : ControllerBase
     {
-        private static List<Produto> produtos = new List<Produto>()
-        {
-            new Produto { Id=1, Nome="Camisa Polo Branca", Codigo= 100001, Categoria_Id=1, Image_Url="camiseta_polo_Preta.com.br",data_criacao=new DateTime(2025,01,15), data_ultimaAlteracao = new DateTime(2025,01,15), Produto_Ativo=true},
-            new Produto { Id=2, Nome="Camisa Polo preto ", Codigo= 100001, Categoria_Id=1, Image_Url="camiseta_polo_Branca.com.br",data_criacao=new DateTime(2025,01,15), data_ultimaAlteracao = new DateTime(2025,01,15), Produto_Ativo=true}
+        private readonly DataContext _context;
 
-        };
+        public ProdutoController(DataContext context)
+        {
+            _context = context;
+        }
+
 
         #region  Get
 
-        [HttpGet]
-        public IActionResult GetFisrt()
-        {
-            Produto p = produtos[0];
-            return Ok(p);
-        }
-
         [HttpGet("GetAll")]
-        public IActionResult getAll()
+        public async Task<IActionResult> getAll()
         {
-            return Ok(produtos);
+            try
+            {
+                List<Produto> lista = await _context.TB_PRODUTOS.ToListAsync();
+
+                return Ok(lista);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
-        [HttpGet("id")]
-        public IActionResult GetId(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetId(int id)
         {
-            return Ok(produtos.FirstOrDefault(p => p.Id == id));
+            try
+            {
+                if (id == 0)
+                {
+                    throw new Exception("O ID não pode ser igual Zero.");
+                }
+                Produto prod = await _context.TB_PRODUTOS.FirstOrDefaultAsync(p => p.Id == id);
+                if (prod == null)
+                {
+                    throw new Exception("ID não encontrado.");
+                }
+
+                return Ok(prod);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         #endregion
 
         [HttpPost]
-        public IActionResult AddProduto(Produto novoProduto)
+        public async Task<IActionResult> AddProduto(Produto novoProduto)
         {
-            produtos.Add(novoProduto);
+            try
+            {
+                novoProduto.data_criacao = DateTime.Now;
+                novoProduto.data_ultimaAlteracao = novoProduto.data_criacao;
 
-            novoProduto.data_criacao = DateTime.Now;
-            novoProduto.data_ultimaAlteracao = novoProduto.data_criacao;
+                await _context.TB_PRODUTOS.AddAsync(novoProduto);
+                await _context.SaveChangesAsync();
 
-            string mensagem = $"Produto adiciona ao Sistema com o Id{novoProduto.Id}";
-            return Ok(mensagem);
+                string mensagem = $"Produto adiciona ao Sistema com o Id{novoProduto.Id}";
+                return Ok(mensagem);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut]
-        public IActionResult Update(Produto P)
+        public async Task<IActionResult> Update(Produto P)
         {
-            Produto prodAlterado = produtos.Find(prod => prod.Id == P.Id);
-            prodAlterado.Nome = P.Nome;
-            prodAlterado.Categoria_Id = P.Categoria_Id;
-            prodAlterado.Codigo = P.Codigo;
-            prodAlterado.data_ultimaAlteracao = DateTime.Now;
-            prodAlterado.Image_Url = P.Image_Url;
-            prodAlterado.Produto_Ativo = P.Produto_Ativo;
+            try
+            {
+                _context.TB_PRODUTOS.Update(P);
+                int linhasAfetadas = await _context.SaveChangesAsync();
 
-            return Ok($"Produto Alterado com sucesso{P}");
+                return Ok(linhasAfetadas);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int Id)
+        public async Task<IActionResult> Delete(int Id)
         {
-            produtos.RemoveAll(prod => prod.Id == Id);
+            try
+            {
+                if (Id == 0)
+                {
+                    throw new Exception("O ID não pode ser igual Zero.");
+                }
+                Produto produto = await _context.TB_PRODUTOS.FirstOrDefaultAsync(prod => prod.Id == Id);
 
-            return Ok(produtos);
+                if (produto == null)
+                {
+                    throw new Exception("ID não encontrado.");
+                }
+
+                _context.TB_PRODUTOS.Remove(produto);
+                int linhasAfetadas = await _context.SaveChangesAsync();
+
+                return Ok(linhasAfetadas);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

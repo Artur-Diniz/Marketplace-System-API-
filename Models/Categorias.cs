@@ -1,7 +1,7 @@
 namespace marktplace_sistem.models
 {
 
-    public class Categorias
+    public class Categoria
     {
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;

@@ -1,0 +1,66 @@
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\marktplace sistem.exe
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\appsettings.Development.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\appsettings.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\marktplace sistem.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\marktplace sistem.runtimeconfig.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\marktplace sistem.pdb
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Azure.Core.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Azure.Identity.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Data.SqlClient.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.EntityFrameworkCore.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.Logging.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.Options.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Extensions.Primitives.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Identity.Client.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.IdentityModel.Logging.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.IdentityModel.Protocols.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.IdentityModel.Tokens.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.OpenApi.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.SqlServer.Server.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Microsoft.Win32.SystemEvents.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.ClientModel.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Configuration.ConfigurationManager.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Diagnostics.DiagnosticSource.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Drawing.Common.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Formats.Asn1.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.IO.Pipelines.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Memory.Data.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Runtime.Caching.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Security.Cryptography.ProtectedData.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Security.Permissions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Text.Encodings.Web.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Text.Json.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\System.Windows.Extensions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\publish\marktplace sistem.deps.json

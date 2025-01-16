@@ -22,6 +22,39 @@ namespace marktplace_sistem.Controllers.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("marktplace_sistem.models.Categoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TB_CATEGORIAS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Descricao = "Camisas e camisetas",
+                            Nome = "Camisetas"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Descricao = "Calças e Shorts",
+                            Nome = "Calcas"
+                        });
+                });
+
             modelBuilder.Entity("marktplace_sistem.models.Produto", b =>
                 {
                     b.Property<int>("Id")
@@ -40,7 +73,6 @@ namespace marktplace_sistem.Controllers.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Produto_Ativo")
