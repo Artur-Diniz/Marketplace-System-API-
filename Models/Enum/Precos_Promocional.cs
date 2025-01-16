@@ -1,4 +1,4 @@
-namespace MarktplaceSitem.models
+namespace marktplace_sistem.models
 {
 
     public enum PrecosEnum

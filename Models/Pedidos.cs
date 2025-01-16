@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MarktplaceSitem.models
+namespace marktplace_sistem.models
 {
 
     public class Pedidos
