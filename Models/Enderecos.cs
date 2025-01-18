@@ -16,7 +16,10 @@ namespace marktplace_sistem.models
 
 
         public int? Clientes_Cnpj_Id { get; set; }
+        public Clientes_Cnpj Clientes_Cnpj { get; set; }
         public int? Clientes_CPF_Id { get; set; }
+        public Clientes_CPF Clientes_CPF { get; set; }
+
 
 
     }

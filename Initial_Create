@@ -74,20 +74,6 @@ CREATE TABLE [TB_FORNEDORES] (
     CONSTRAINT [PK_TB_FORNEDORES] PRIMARY KEY ([Id])
 );
 
-CREATE TABLE [TB_PRECOS] (
-    [Id] int NOT NULL IDENTITY,
-    [Id_produto] int NOT NULL,
-    [preco_base] float NOT NULL,
-    [preco_venda] float NOT NULL,
-    [preco_promocional] float NOT NULL,
-    [data_inicial] datetime2 NOT NULL,
-    [data_fim] datetime2 NOT NULL,
-    [data_promo_inicial] datetime2 NOT NULL,
-    [data_promo_final] datetime2 NOT NULL,
-    [Status] int NOT NULL,
-    CONSTRAINT [PK_TB_PRECOS] PRIMARY KEY ([Id])
-);
-
 CREATE TABLE [TB_PEDIDOS] (
     [Id] int NOT NULL IDENTITY,
     [Id_Cliente_CPF] int NULL,
@@ -106,19 +92,17 @@ CREATE TABLE [TB_PRODUTOS] (
     [Id] int NOT NULL IDENTITY,
     [Nome] nvarchar(max) NULL,
     [Codigo] int NOT NULL,
-    [Categoria_Id] int NOT NULL,
     [Image_Url] nvarchar(max) NULL,
     [Produto_Ativo] bit NOT NULL,
     [Tamanho] nvarchar(max) NULL,
     [Cor] nvarchar(max) NULL,
     [Id_Estoque] int NOT NULL,
-    [Id_Precos] int NOT NULL,
+    [Id_categoria] int NOT NULL,
     [data_criacao] datetime2 NOT NULL,
     [data_ultimaAlteracao] datetime2 NOT NULL,
     CONSTRAINT [PK_TB_PRODUTOS] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_TB_PRODUTOS_TB_CATEGORIAS_Categoria_Id] FOREIGN KEY ([Categoria_Id]) REFERENCES [TB_CATEGORIAS] ([Id]) ON DELETE CASCADE,
-    CONSTRAINT [FK_TB_PRODUTOS_TB_ESTOQUE_Id_Estoque] FOREIGN KEY ([Id_Estoque]) REFERENCES [TB_ESTOQUE] ([Id]) ON DELETE CASCADE,
-    CONSTRAINT [FK_TB_PRODUTOS_TB_PRECOS_Id_Precos] FOREIGN KEY ([Id_Precos]) REFERENCES [TB_PRECOS] ([Id]) ON DELETE CASCADE
+    CONSTRAINT [FK_TB_PRODUTOS_TB_CATEGORIAS_Id_categoria] FOREIGN KEY ([Id_categoria]) REFERENCES [TB_CATEGORIAS] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_TB_PRODUTOS_TB_ESTOQUE_Id_Estoque] FOREIGN KEY ([Id_Estoque]) REFERENCES [TB_ESTOQUE] ([Id]) ON DELETE CASCADE
 );
 
 CREATE TABLE [TB_COMPRAS] (
@@ -189,6 +173,21 @@ CREATE TABLE [TB_LUCROS] (
     CONSTRAINT [FK_TB_LUCROS_TB_PRODUTOS_Id_produto] FOREIGN KEY ([Id_produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
 );
 
+CREATE TABLE [TB_PRECOS] (
+    [Id] int NOT NULL IDENTITY,
+    [Id_produto] int NOT NULL,
+    [preco_base] float NOT NULL,
+    [preco_venda] float NOT NULL,
+    [preco_promocional] float NOT NULL,
+    [data_inicial] datetime2 NOT NULL,
+    [data_fim] datetime2 NOT NULL,
+    [data_promo_inicial] datetime2 NOT NULL,
+    [data_promo_final] datetime2 NOT NULL,
+    [Status] int NOT NULL,
+    CONSTRAINT [PK_TB_PRECOS] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_TB_PRECOS_TB_PRODUTOS_Id_produto] FOREIGN KEY ([Id_produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
+);
+
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Descricao', N'Nome') AND [object_id] = OBJECT_ID(N'[TB_CATEGORIAS]'))
     SET IDENTITY_INSERT [TB_CATEGORIAS] ON;
 INSERT INTO [TB_CATEGORIAS] ([Id], [Descricao], [Nome])
@@ -205,12 +204,12 @@ VALUES (1, N'jonas@gmail.com', CAST(1 AS bit), N'Jonas', 1124311717, N'123123123
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Email', N'Fornecedor_Ativo', N'Nome', N'Telefone', N'cnpj') AND [object_id] = OBJECT_ID(N'[TB_FORNEDORES]'))
     SET IDENTITY_INSERT [TB_FORNEDORES] OFF;
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Categoria_Id', N'Codigo', N'Cor', N'Id_Estoque', N'Id_Precos', N'Image_Url', N'Nome', N'Produto_Ativo', N'Tamanho', N'data_criacao', N'data_ultimaAlteracao') AND [object_id] = OBJECT_ID(N'[TB_PRODUTOS]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Codigo', N'Cor', N'Id_Estoque', N'Id_categoria', N'Image_Url', N'Nome', N'Produto_Ativo', N'Tamanho', N'data_criacao', N'data_ultimaAlteracao') AND [object_id] = OBJECT_ID(N'[TB_PRODUTOS]'))
     SET IDENTITY_INSERT [TB_PRODUTOS] ON;
-INSERT INTO [TB_PRODUTOS] ([Id], [Categoria_Id], [Codigo], [Cor], [Id_Estoque], [Id_Precos], [Image_Url], [Nome], [Produto_Ativo], [Tamanho], [data_criacao], [data_ultimaAlteracao])
-VALUES (1, 1, 100001, N'Preto', 0, 0, N'camiseta_polo_Preta.com.br', N'Camisa Polo Gola V', CAST(1 AS bit), N'Médio', '2025-01-15T00:00:00.0000000', '2025-01-15T00:00:00.0000000'),
-(2, 1, 100002, N'Branco', 0, 0, N'camiseta_polo_Branca.com.br', N'Camisa Polo', CAST(1 AS bit), N'Médio', '2025-01-15T00:00:00.0000000', '2025-01-15T00:00:00.0000000');
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Categoria_Id', N'Codigo', N'Cor', N'Id_Estoque', N'Id_Precos', N'Image_Url', N'Nome', N'Produto_Ativo', N'Tamanho', N'data_criacao', N'data_ultimaAlteracao') AND [object_id] = OBJECT_ID(N'[TB_PRODUTOS]'))
+INSERT INTO [TB_PRODUTOS] ([Id], [Codigo], [Cor], [Id_Estoque], [Id_categoria], [Image_Url], [Nome], [Produto_Ativo], [Tamanho], [data_criacao], [data_ultimaAlteracao])
+VALUES (1, 100001, N'Preto', 0, 1, N'camiseta_polo_Preta.com.br', N'Camisa Polo Gola V', CAST(1 AS bit), N'Médio', '2025-01-15T00:00:00.0000000', '2025-01-15T00:00:00.0000000'),
+(2, 100002, N'Branco', 0, 1, N'camiseta_polo_Branca.com.br', N'Camisa Polo', CAST(1 AS bit), N'Médio', '2025-01-15T00:00:00.0000000', '2025-01-15T00:00:00.0000000');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Codigo', N'Cor', N'Id_Estoque', N'Id_categoria', N'Image_Url', N'Nome', N'Produto_Ativo', N'Tamanho', N'data_criacao', N'data_ultimaAlteracao') AND [object_id] = OBJECT_ID(N'[TB_PRODUTOS]'))
     SET IDENTITY_INSERT [TB_PRODUTOS] OFF;
 
 CREATE INDEX [IX_TB_COMPRAS_Id_fornecedor] ON [TB_COMPRAS] ([Id_fornecedor]);
@@ -233,14 +232,14 @@ CREATE INDEX [IX_TB_PEDIDOS_Id_Cliente_CNPJ] ON [TB_PEDIDOS] ([Id_Cliente_CNPJ])
 
 CREATE INDEX [IX_TB_PEDIDOS_Id_Cliente_CPF] ON [TB_PEDIDOS] ([Id_Cliente_CPF]);
 
-CREATE INDEX [IX_TB_PRODUTOS_Categoria_Id] ON [TB_PRODUTOS] ([Categoria_Id]);
+CREATE INDEX [IX_TB_PRECOS_Id_produto] ON [TB_PRECOS] ([Id_produto]);
+
+CREATE INDEX [IX_TB_PRODUTOS_Id_categoria] ON [TB_PRODUTOS] ([Id_categoria]);
 
 CREATE UNIQUE INDEX [IX_TB_PRODUTOS_Id_Estoque] ON [TB_PRODUTOS] ([Id_Estoque]);
 
-CREATE UNIQUE INDEX [IX_TB_PRODUTOS_Id_Precos] ON [TB_PRODUTOS] ([Id_Precos]);
-
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20250118064428_InitialCreate', N'9.0.1');
+VALUES (N'20250118192103_InitialCreate', N'9.0.1');
 
 COMMIT;
 GO

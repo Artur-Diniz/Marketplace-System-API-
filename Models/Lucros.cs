@@ -1,4 +1,5 @@
 using System.Net.NetworkInformation;
+using System.Text.Json.Serialization;
 
 namespace marktplace_sistem.models
 {
@@ -7,6 +8,7 @@ namespace marktplace_sistem.models
     {
         public int Id { get; set; }
         public int Id_produto { get; set; }
+        [JsonIgnore]
         public Produto Produto { get; set; }
         public double preco_custo { get; set; }
         public double preco_unitario { get; set; }

@@ -173,3 +173,7 @@ C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\
 C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\publish\appsettings.json
 C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\publish\marktplace sistem.deps.json
 C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\publish\marktplace sistem.runtimeconfig.json
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\artur\OneDrive\Área de Trabalho\projetos protifolio\marktplace sistem\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

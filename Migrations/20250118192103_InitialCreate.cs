@@ -121,27 +121,6 @@ namespace marktplace_sistem.Controllers.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TB_PRECOS",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Id_produto = table.Column<int>(type: "int", nullable: false),
-                    preco_base = table.Column<double>(type: "float", nullable: false),
-                    preco_venda = table.Column<double>(type: "float", nullable: false),
-                    preco_promocional = table.Column<double>(type: "float", nullable: false),
-                    data_inicial = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    data_fim = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    data_promo_inicial = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    data_promo_final = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TB_PRECOS", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TB_PEDIDOS",
                 columns: table => new
                 {
@@ -180,13 +159,12 @@ namespace marktplace_sistem.Controllers.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Codigo = table.Column<int>(type: "int", nullable: false),
-                    Categoria_Id = table.Column<int>(type: "int", nullable: false),
                     Image_Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Produto_Ativo = table.Column<bool>(type: "bit", nullable: false),
                     Tamanho = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cor = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Id_Estoque = table.Column<int>(type: "int", nullable: false),
-                    Id_Precos = table.Column<int>(type: "int", nullable: false),
+                    Id_categoria = table.Column<int>(type: "int", nullable: false),
                     data_criacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     data_ultimaAlteracao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -194,8 +172,8 @@ namespace marktplace_sistem.Controllers.Migrations
                 {
                     table.PrimaryKey("PK_TB_PRODUTOS", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TB_PRODUTOS_TB_CATEGORIAS_Categoria_Id",
-                        column: x => x.Categoria_Id,
+                        name: "FK_TB_PRODUTOS_TB_CATEGORIAS_Id_categoria",
+                        column: x => x.Id_categoria,
                         principalTable: "TB_CATEGORIAS",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -203,12 +181,6 @@ namespace marktplace_sistem.Controllers.Migrations
                         name: "FK_TB_PRODUTOS_TB_ESTOQUE_Id_Estoque",
                         column: x => x.Id_Estoque,
                         principalTable: "TB_ESTOQUE",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TB_PRODUTOS_TB_PRECOS_Id_Precos",
-                        column: x => x.Id_Precos,
-                        principalTable: "TB_PRECOS",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -367,6 +339,33 @@ namespace marktplace_sistem.Controllers.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TB_PRECOS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id_produto = table.Column<int>(type: "int", nullable: false),
+                    preco_base = table.Column<double>(type: "float", nullable: false),
+                    preco_venda = table.Column<double>(type: "float", nullable: false),
+                    preco_promocional = table.Column<double>(type: "float", nullable: false),
+                    data_inicial = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    data_fim = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    data_promo_inicial = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    data_promo_final = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_PRECOS", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TB_PRECOS_TB_PRODUTOS_Id_produto",
+                        column: x => x.Id_produto,
+                        principalTable: "TB_PRODUTOS",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "TB_CATEGORIAS",
                 columns: new[] { "Id", "Descricao", "Nome" },
@@ -387,11 +386,11 @@ namespace marktplace_sistem.Controllers.Migrations
 
             migrationBuilder.InsertData(
                 table: "TB_PRODUTOS",
-                columns: new[] { "Id", "Categoria_Id", "Codigo", "Cor", "Id_Estoque", "Id_Precos", "Image_Url", "Nome", "Produto_Ativo", "Tamanho", "data_criacao", "data_ultimaAlteracao" },
+                columns: new[] { "Id", "Codigo", "Cor", "Id_Estoque", "Id_categoria", "Image_Url", "Nome", "Produto_Ativo", "Tamanho", "data_criacao", "data_ultimaAlteracao" },
                 values: new object[,]
                 {
-                    { 1, 1, 100001, "Preto", 0, 0, "camiseta_polo_Preta.com.br", "Camisa Polo Gola V", true, "Médio", new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, 100002, "Branco", 0, 0, "camiseta_polo_Branca.com.br", "Camisa Polo", true, "Médio", new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 100001, "Preto", 0, 1, "camiseta_polo_Preta.com.br", "Camisa Polo Gola V", true, "Médio", new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 100002, "Branco", 0, 1, "camiseta_polo_Branca.com.br", "Camisa Polo", true, "Médio", new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -446,20 +445,19 @@ namespace marktplace_sistem.Controllers.Migrations
                 column: "Id_Cliente_CPF");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_PRODUTOS_Categoria_Id",
+                name: "IX_TB_PRECOS_Id_produto",
+                table: "TB_PRECOS",
+                column: "Id_produto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_PRODUTOS_Id_categoria",
                 table: "TB_PRODUTOS",
-                column: "Categoria_Id");
+                column: "Id_categoria");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_PRODUTOS_Id_Estoque",
                 table: "TB_PRODUTOS",
                 column: "Id_Estoque",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TB_PRODUTOS_Id_Precos",
-                table: "TB_PRODUTOS",
-                column: "Id_Precos",
                 unique: true);
         }
 
@@ -488,6 +486,9 @@ namespace marktplace_sistem.Controllers.Migrations
                 name: "TB_LUCROS");
 
             migrationBuilder.DropTable(
+                name: "TB_PRECOS");
+
+            migrationBuilder.DropTable(
                 name: "TB_FORNEDORES");
 
             migrationBuilder.DropTable(
@@ -507,9 +508,6 @@ namespace marktplace_sistem.Controllers.Migrations
 
             migrationBuilder.DropTable(
                 name: "TB_ESTOQUE");
-
-            migrationBuilder.DropTable(
-                name: "TB_PRECOS");
         }
     }
 }

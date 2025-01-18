@@ -45,7 +45,22 @@ namespace marktplace_sistem.Controllers
                 {
                     throw new Exception("O ID não pode ser igual Zero.");
                 }
-                Produto prod = await _context.TB_PRODUTOS.FirstOrDefaultAsync(p => p.Id == id);
+
+                Produto prod = await _context.TB_PRODUTOS
+                .Include(c => c.categoria)
+                .Include(i => i.Impostos)
+                .Include(it => it.Itens_Pedidos)
+                .Include(c => c.Compras)
+                .Include(hi => hi.Historico_Precos)
+                .Include(l => l.Lucros)
+                .Include(p => p.Precos)
+                .Include(e => e.Estoque)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+                //categoria, Impostos, Itens_Pedidos,Compras,Historico_Precos,Lucros,Precos,Estoque
+                // Estoque categoria
+
+
                 if (prod == null)
                 {
                     throw new Exception("ID não encontrado.");
@@ -68,6 +83,16 @@ namespace marktplace_sistem.Controllers
             {
                 novoProduto.data_criacao = DateTime.Now;
                 novoProduto.data_ultimaAlteracao = novoProduto.data_criacao;
+
+
+                Estoque estoque = await _context.TB_ESTOQUE
+                .FirstOrDefaultAsync(e => e.Id == novoProduto.Id_Estoque);
+                novoProduto.Estoque = estoque;
+
+                Categoria  categoria = await _context.TB_CATEGORIAS
+                .FirstOrDefaultAsync(e => e.Id == novoProduto.Id_categoria);
+                novoProduto.categoria = categoria;
+
 
                 await _context.TB_PRODUTOS.AddAsync(novoProduto);
                 await _context.SaveChangesAsync();

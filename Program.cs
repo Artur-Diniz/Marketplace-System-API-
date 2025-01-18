@@ -8,18 +8,22 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(
-    
-    options => { options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoSomee"));
-    
+
+    options =>
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoSomee"));
+
     });
-    
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
-
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling =
+    Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddCors(options =>
 {
@@ -52,7 +56,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

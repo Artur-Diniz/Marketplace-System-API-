@@ -58,10 +58,22 @@ namespace marktplace_sistem.Data
                 .HasForeignKey(p => p.Id_Cliente_CPF)
                 .OnDelete(DeleteBehavior.Restrict); 
 
-            modelBuilder.Entity<Pedidos>()
+             modelBuilder.Entity<Pedidos>()
                 .HasOne(p => p.Clientes_CNPJ)
                 .WithMany()
                 .HasForeignKey(p => p.Id_Cliente_CNPJ)
+                .OnDelete(DeleteBehavior.Restrict); 
+            
+             modelBuilder.Entity<Enderecos>()
+                .HasOne(p => p.Clientes_Cnpj)
+                .WithMany()
+                .HasForeignKey(p => p.Clientes_Cnpj_Id)
+                .OnDelete(DeleteBehavior.Restrict); 
+
+             modelBuilder.Entity<Enderecos>()
+                .HasOne(p => p.Clientes_CPF)
+                .WithMany()
+                .HasForeignKey(p => p.Clientes_CPF_Id)
                 .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Fornecedor_Produto>(entity =>
@@ -111,15 +123,15 @@ namespace marktplace_sistem.Data
 
             modelBuilder.Entity<Precos>()
                 .HasOne(p => p.Produto)
-                .WithOne(pre => pre.Precos)
-                .HasForeignKey<Produto>(p => p.Id_Precos)
+                .WithMany(pre => pre.Precos)
+                .HasForeignKey(p => p.Id_produto)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
             modelBuilder.Entity<Categoria>()
                .HasMany(c => c.Produtos)
                .WithOne(pre => pre.categoria)
-               .HasForeignKey(p => p.Categoria_Id)
+               .HasForeignKey(p => p.Id_categoria)
                .OnDelete(DeleteBehavior.Cascade)
                .IsRequired();
 
@@ -185,8 +197,8 @@ namespace marktplace_sistem.Data
 
             modelBuilder.Entity<Produto>().HasData
             (
-                new Produto { Id = 1, Nome = "Camisa Polo Gola V", Codigo = 100001, Categoria_Id = 1, Tamanho = "Médio", Cor = "Preto", Image_Url = "camiseta_polo_Preta.com.br", data_criacao = new DateTime(2025, 01, 15), data_ultimaAlteracao = new DateTime(2025, 01, 15), Produto_Ativo = true },
-                new Produto { Id = 2, Nome = "Camisa Polo", Codigo = 100002, Categoria_Id = 1, Tamanho = "Médio", Cor = "Branco", Image_Url = "camiseta_polo_Branca.com.br", data_criacao = new DateTime(2025, 01, 15), data_ultimaAlteracao = new DateTime(2025, 01, 15), Produto_Ativo = true }
+                new Produto { Id = 1, Nome = "Camisa Polo Gola V", Codigo = 100001, Id_categoria = 1, Tamanho = "Médio", Cor = "Preto", Image_Url = "camiseta_polo_Preta.com.br", data_criacao = new DateTime(2025, 01, 15), data_ultimaAlteracao = new DateTime(2025, 01, 15), Produto_Ativo = true },
+                new Produto { Id = 2, Nome = "Camisa Polo", Codigo = 100002, Id_categoria = 1, Tamanho = "Médio", Cor = "Branco", Image_Url = "camiseta_polo_Branca.com.br", data_criacao = new DateTime(2025, 01, 15), data_ultimaAlteracao = new DateTime(2025, 01, 15), Produto_Ativo = true }
 
             );
             modelBuilder.Entity<Categoria>().HasData

@@ -16,6 +16,8 @@ namespace marktplace_sistem.models
         public DateTime data_Cadastro { get; set; }
         public DateTime data_UltimaCompra { get; set; }
 
+        public ICollection<Enderecos> Enderecos { get; set; }
+
         // ativo, Pedido pendente, intaivo (ultima compra em 1 ano)
         public ClientesEnum Status { get; set; }
     }

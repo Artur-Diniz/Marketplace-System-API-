@@ -505,6 +505,8 @@ namespace marktplace_sistem.Controllers.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Id_produto");
+
                     b.ToTable("TB_PRECOS");
                 });
 
@@ -516,9 +518,6 @@ namespace marktplace_sistem.Controllers.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Categoria_Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("Codigo")
                         .HasColumnType("int");
 
@@ -528,7 +527,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<int>("Id_Estoque")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id_Precos")
+                    b.Property<int>("Id_categoria")
                         .HasColumnType("int");
 
                     b.Property<string>("Image_Url")
@@ -551,13 +550,10 @@ namespace marktplace_sistem.Controllers.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Categoria_Id");
-
                     b.HasIndex("Id_Estoque")
                         .IsUnique();
 
-                    b.HasIndex("Id_Precos")
-                        .IsUnique();
+                    b.HasIndex("Id_categoria");
 
                     b.ToTable("TB_PRODUTOS");
 
@@ -565,11 +561,10 @@ namespace marktplace_sistem.Controllers.Migrations
                         new
                         {
                             Id = 1,
-                            Categoria_Id = 1,
                             Codigo = 100001,
                             Cor = "Preto",
                             Id_Estoque = 0,
-                            Id_Precos = 0,
+                            Id_categoria = 1,
                             Image_Url = "camiseta_polo_Preta.com.br",
                             Nome = "Camisa Polo Gola V",
                             Produto_Ativo = true,
@@ -580,11 +575,10 @@ namespace marktplace_sistem.Controllers.Migrations
                         new
                         {
                             Id = 2,
-                            Categoria_Id = 1,
                             Codigo = 100002,
                             Cor = "Branco",
                             Id_Estoque = 0,
-                            Id_Precos = 0,
+                            Id_categoria = 1,
                             Image_Url = "camiseta_polo_Branca.com.br",
                             Nome = "Camisa Polo",
                             Produto_Ativo = true,
@@ -701,29 +695,32 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Navigation("Clientes_CPF");
                 });
 
-            modelBuilder.Entity("marktplace_sistem.models.Produto", b =>
+            modelBuilder.Entity("marktplace_sistem.models.Precos", b =>
                 {
-                    b.HasOne("marktplace_sistem.models.Categoria", "categoria")
-                        .WithMany("Produtos")
-                        .HasForeignKey("Categoria_Id")
+                    b.HasOne("marktplace_sistem.models.Produto", "Produto")
+                        .WithMany("Precos")
+                        .HasForeignKey("Id_produto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("marktplace_sistem.models.Produto", b =>
+                {
                     b.HasOne("marktplace_sistem.models.Estoque", "Estoque")
                         .WithOne("Produto")
                         .HasForeignKey("marktplace_sistem.models.Produto", "Id_Estoque")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("marktplace_sistem.models.Precos", "Precos")
-                        .WithOne("Produto")
-                        .HasForeignKey("marktplace_sistem.models.Produto", "Id_Precos")
+                    b.HasOne("marktplace_sistem.models.Categoria", "categoria")
+                        .WithMany("Produtos")
+                        .HasForeignKey("Id_categoria")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Estoque");
-
-                    b.Navigation("Precos");
 
                     b.Navigation("categoria");
                 });
@@ -750,11 +747,6 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Navigation("Itens_Pedidos");
                 });
 
-            modelBuilder.Entity("marktplace_sistem.models.Precos", b =>
-                {
-                    b.Navigation("Produto");
-                });
-
             modelBuilder.Entity("marktplace_sistem.models.Produto", b =>
                 {
                     b.Navigation("Compras");
@@ -768,6 +760,8 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Navigation("Itens_Pedidos");
 
                     b.Navigation("Lucros");
+
+                    b.Navigation("Precos");
                 });
 #pragma warning restore 612, 618
         }
