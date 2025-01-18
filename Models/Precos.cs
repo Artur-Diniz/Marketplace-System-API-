@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace marktplace_sistem.models
 {
 
@@ -5,6 +7,9 @@ namespace marktplace_sistem.models
     {
         public int Id { get; set; }
         public int Id_produto { get; set; }
+
+        [JsonIgnore]
+        public Produto Produto { get; set; }
         public double preco_base { get; set; } //sem desconto
         public double preco_venda { get; set; }// com imposto 
         public double preco_promocional { get; set; }

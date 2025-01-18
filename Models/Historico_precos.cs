@@ -5,6 +5,7 @@ namespace marktplace_sistem.models
     {
         public int Id { get; set; }
         public int Id_produto { get; set; }
+        public Produto Produto { get; set; }
         public double preco_base { get; set; }
         public double preco_venda { get; set; }//com imposto adicionado
 

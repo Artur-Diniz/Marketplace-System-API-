@@ -11,8 +11,13 @@ namespace marktplace_sistem.models
         public string Complemento { get; set; } = string.Empty;
         public string Bairro { get; set; } = string.Empty;
         public string Cidade { get; set; } = string.Empty;
-        public string Estado { get; set; } = string.Empty;//lembrar de setar 2 casas 
+        public string UF { get; set; } = string.Empty;//lembrar de setar 2 casas 
         public string Pais { get; set; } = string.Empty;
+
+
+        public int? Clientes_Cnpj_Id { get; set; }
+        public int? Clientes_CPF_Id { get; set; }
+
 
     }
 }

@@ -9,8 +9,6 @@ namespace marktplace_sistem.models
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
 
-        //lembrar quando for terminar as tabelas antes de gerar o script limitar a 14 casas
-        [Key]
         public string Cnpj { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public int Telefone { get; set; }
