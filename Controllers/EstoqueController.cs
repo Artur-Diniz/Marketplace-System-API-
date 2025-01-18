@@ -40,18 +40,16 @@ namespace marktplace_sistem.Controllers
             try
             {
                 if (id == 0)
-                {
                     throw new Exception("O ID não pode ser igual Zero.");
-                }
+
 
                 Estoque estoque = await _context.TB_ESTOQUE
                 .Include(e => e.Produto)
                 .FirstOrDefaultAsync(e => e.Id == id);
 
                 if (estoque == null)
-                {
                     throw new Exception("ID não encontrado.");
-                }
+
 
                 return Ok(estoque);
             }
@@ -80,7 +78,6 @@ namespace marktplace_sistem.Controllers
                 string mensagem = $"Estoque adiciona ao Sistema com o Id{novoEstoque.Id}";
 
                 return Ok(mensagem);
-
 
             }
             catch (System.Exception ex)
