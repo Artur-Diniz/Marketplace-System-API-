@@ -24,7 +24,8 @@ namespace marktplace_sistem.Controllers
         {
             try
             {
-                List<Produto> lista = await _context.TB_PRODUTOS.ToListAsync();
+                List<Produto> lista = await _context.TB_PRODUTOS
+                .ToListAsync();
 
                 return Ok(lista);
 
@@ -89,7 +90,7 @@ namespace marktplace_sistem.Controllers
                 .FirstOrDefaultAsync(e => e.Id == novoProduto.Id_Estoque);
                 novoProduto.Estoque = estoque;
 
-                Categoria  categoria = await _context.TB_CATEGORIAS
+                Categoria categoria = await _context.TB_CATEGORIAS
                 .FirstOrDefaultAsync(e => e.Id == novoProduto.Id_categoria);
                 novoProduto.categoria = categoria;
 
@@ -111,6 +112,16 @@ namespace marktplace_sistem.Controllers
         {
             try
             {
+
+                Estoque estoque = await _context.TB_ESTOQUE
+                .FirstOrDefaultAsync(e => e.Id == P.Id_Estoque);
+                P.Estoque = estoque;
+
+                Categoria categoria = await _context.TB_CATEGORIAS
+                .FirstOrDefaultAsync(e => e.Id == P.Id_categoria);
+                P.categoria = categoria;
+
+                
                 _context.TB_PRODUTOS.Update(P);
                 int linhasAfetadas = await _context.SaveChangesAsync();
 
@@ -128,15 +139,13 @@ namespace marktplace_sistem.Controllers
             try
             {
                 if (Id == 0)
-                {
                     throw new Exception("O ID não pode ser igual Zero.");
-                }
+
                 Produto produto = await _context.TB_PRODUTOS.FirstOrDefaultAsync(prod => prod.Id == Id);
 
                 if (produto == null)
-                {
                     throw new Exception("ID não encontrado.");
-                }
+
 
                 _context.TB_PRODUTOS.Remove(produto);
                 int linhasAfetadas = await _context.SaveChangesAsync();
