@@ -68,7 +68,7 @@ namespace marktplace_sistem.Controllers
             try
             {
                 Produto produto = await _context.TB_PRODUTOS
-             .FirstOrDefaultAsync(p => p.Id_Estoque == lucros.Id_produto);
+             .FirstOrDefaultAsync(p => p.Id == lucros.Id_produto);
 
                 lucros.Produto = produto;
 
@@ -92,7 +92,7 @@ namespace marktplace_sistem.Controllers
             try
             {
                 Produto produto = await _context.TB_PRODUTOS
-             .FirstOrDefaultAsync(p => p.Id_Estoque == l.Id_produto);
+             .FirstOrDefaultAsync(p => p.Id == l.Id_produto);
 
                 l.Produto = produto;
                 _context.TB_LUCROS.Update(l);
