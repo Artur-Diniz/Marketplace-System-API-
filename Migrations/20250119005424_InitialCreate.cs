@@ -66,27 +66,6 @@ namespace marktplace_sistem.Controllers.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TB_ENDERECOS",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    numero = table.Column<int>(type: "int", nullable: false),
-                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UF = table.Column<string>(type: "nchar(2)", fixedLength: true, maxLength: 2, nullable: false),
-                    Pais = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Clientes_Cnpj_Id = table.Column<int>(type: "int", nullable: true),
-                    Clientes_CPF_Id = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TB_ENDERECOS", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TB_ESTOQUE",
                 columns: table => new
                 {
@@ -118,6 +97,51 @@ namespace marktplace_sistem.Controllers.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_FORNEDORES", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_ENDERECOS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    numero = table.Column<int>(type: "int", nullable: false),
+                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UF = table.Column<string>(type: "nchar(2)", fixedLength: true, maxLength: 2, nullable: false),
+                    Pais = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Clientes_Cnpj_Id = table.Column<int>(type: "int", nullable: true),
+                    Clientes_CPF_Id = table.Column<int>(type: "int", nullable: true),
+                    Clientes_CPFId = table.Column<int>(type: "int", nullable: true),
+                    Clientes_CnpjId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_ENDERECOS", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TB_ENDERECOS_TB_CLIENTES_CNPJ_Clientes_CnpjId",
+                        column: x => x.Clientes_CnpjId,
+                        principalTable: "TB_CLIENTES_CNPJ",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TB_ENDERECOS_TB_CLIENTES_CNPJ_Clientes_Cnpj_Id",
+                        column: x => x.Clientes_Cnpj_Id,
+                        principalTable: "TB_CLIENTES_CNPJ",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TB_ENDERECOS_TB_CLIENTES_CPF_Clientes_CPFId",
+                        column: x => x.Clientes_CPFId,
+                        principalTable: "TB_CLIENTES_CPF",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TB_ENDERECOS_TB_CLIENTES_CPF_Clientes_CPF_Id",
+                        column: x => x.Clientes_CPF_Id,
+                        principalTable: "TB_CLIENTES_CPF",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -402,6 +426,26 @@ namespace marktplace_sistem.Controllers.Migrations
                 name: "IX_TB_COMPRAS_Id_produto",
                 table: "TB_COMPRAS",
                 column: "Id_produto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_ENDERECOS_Clientes_Cnpj_Id",
+                table: "TB_ENDERECOS",
+                column: "Clientes_Cnpj_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_ENDERECOS_Clientes_CnpjId",
+                table: "TB_ENDERECOS",
+                column: "Clientes_CnpjId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_ENDERECOS_Clientes_CPF_Id",
+                table: "TB_ENDERECOS",
+                column: "Clientes_CPF_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_ENDERECOS_Clientes_CPFId",
+                table: "TB_ENDERECOS",
+                column: "Clientes_CPFId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_FORNECEDOR_PRODUTO_Id_Produto",

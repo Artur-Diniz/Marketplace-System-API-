@@ -40,20 +40,6 @@ CREATE TABLE [TB_CLIENTES_CPF] (
     CONSTRAINT [PK_TB_CLIENTES_CPF] PRIMARY KEY ([Id])
 );
 
-CREATE TABLE [TB_ENDERECOS] (
-    [Id] int NOT NULL IDENTITY,
-    [Logradouro] nvarchar(max) NULL,
-    [numero] int NOT NULL,
-    [Complemento] nvarchar(max) NULL,
-    [Bairro] nvarchar(max) NULL,
-    [Cidade] nvarchar(max) NULL,
-    [UF] nchar(2) NOT NULL,
-    [Pais] nvarchar(max) NULL,
-    [Clientes_Cnpj_Id] int NULL,
-    [Clientes_CPF_Id] int NULL,
-    CONSTRAINT [PK_TB_ENDERECOS] PRIMARY KEY ([Id])
-);
-
 CREATE TABLE [TB_ESTOQUE] (
     [Id] int NOT NULL IDENTITY,
     [Id_Produto] int NOT NULL,
@@ -72,6 +58,26 @@ CREATE TABLE [TB_FORNEDORES] (
     [Email] nvarchar(max) NULL,
     [Fornecedor_Ativo] bit NOT NULL,
     CONSTRAINT [PK_TB_FORNEDORES] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [TB_ENDERECOS] (
+    [Id] int NOT NULL IDENTITY,
+    [Logradouro] nvarchar(max) NULL,
+    [numero] int NOT NULL,
+    [Complemento] nvarchar(max) NULL,
+    [Bairro] nvarchar(max) NULL,
+    [Cidade] nvarchar(max) NULL,
+    [UF] nchar(2) NOT NULL,
+    [Pais] nvarchar(max) NULL,
+    [Clientes_Cnpj_Id] int NULL,
+    [Clientes_CPF_Id] int NULL,
+    [Clientes_CPFId] int NULL,
+    [Clientes_CnpjId] int NULL,
+    CONSTRAINT [PK_TB_ENDERECOS] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_TB_ENDERECOS_TB_CLIENTES_CNPJ_Clientes_CnpjId] FOREIGN KEY ([Clientes_CnpjId]) REFERENCES [TB_CLIENTES_CNPJ] ([Id]),
+    CONSTRAINT [FK_TB_ENDERECOS_TB_CLIENTES_CNPJ_Clientes_Cnpj_Id] FOREIGN KEY ([Clientes_Cnpj_Id]) REFERENCES [TB_CLIENTES_CNPJ] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_TB_ENDERECOS_TB_CLIENTES_CPF_Clientes_CPFId] FOREIGN KEY ([Clientes_CPFId]) REFERENCES [TB_CLIENTES_CPF] ([Id]),
+    CONSTRAINT [FK_TB_ENDERECOS_TB_CLIENTES_CPF_Clientes_CPF_Id] FOREIGN KEY ([Clientes_CPF_Id]) REFERENCES [TB_CLIENTES_CPF] ([Id]) ON DELETE NO ACTION
 );
 
 CREATE TABLE [TB_PEDIDOS] (
@@ -216,6 +222,14 @@ CREATE INDEX [IX_TB_COMPRAS_Id_fornecedor] ON [TB_COMPRAS] ([Id_fornecedor]);
 
 CREATE INDEX [IX_TB_COMPRAS_Id_produto] ON [TB_COMPRAS] ([Id_produto]);
 
+CREATE INDEX [IX_TB_ENDERECOS_Clientes_Cnpj_Id] ON [TB_ENDERECOS] ([Clientes_Cnpj_Id]);
+
+CREATE INDEX [IX_TB_ENDERECOS_Clientes_CnpjId] ON [TB_ENDERECOS] ([Clientes_CnpjId]);
+
+CREATE INDEX [IX_TB_ENDERECOS_Clientes_CPF_Id] ON [TB_ENDERECOS] ([Clientes_CPF_Id]);
+
+CREATE INDEX [IX_TB_ENDERECOS_Clientes_CPFId] ON [TB_ENDERECOS] ([Clientes_CPFId]);
+
 CREATE INDEX [IX_TB_FORNECEDOR_PRODUTO_Id_Produto] ON [TB_FORNECEDOR_PRODUTO] ([Id_Produto]);
 
 CREATE INDEX [IX_TB_HISTORICO_PRECOS_Id_produto] ON [TB_HISTORICO_PRECOS] ([Id_produto]);
@@ -239,7 +253,7 @@ CREATE INDEX [IX_TB_PRODUTOS_Id_categoria] ON [TB_PRODUTOS] ([Id_categoria]);
 CREATE UNIQUE INDEX [IX_TB_PRODUTOS_Id_Estoque] ON [TB_PRODUTOS] ([Id_Estoque]);
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20250118192103_InitialCreate', N'9.0.1');
+VALUES (N'20250119005424_InitialCreate', N'9.0.1');
 
 COMMIT;
 GO

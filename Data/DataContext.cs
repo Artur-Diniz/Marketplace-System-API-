@@ -132,7 +132,6 @@ namespace marktplace_sistem.Data
                .HasMany(c => c.Produtos)
                .WithOne(pre => pre.categoria)
                .HasForeignKey(p => p.Id_categoria)
-               .OnDelete(DeleteBehavior.Cascade)
                .IsRequired();
 
             modelBuilder.Entity<Produto>()

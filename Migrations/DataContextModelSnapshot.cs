@@ -184,7 +184,13 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<string>("Cidade")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Clientes_CPFId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Clientes_CPF_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Clientes_CnpjId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Clientes_Cnpj_Id")
@@ -209,6 +215,14 @@ namespace marktplace_sistem.Controllers.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Clientes_CPFId");
+
+                    b.HasIndex("Clientes_CPF_Id");
+
+                    b.HasIndex("Clientes_CnpjId");
+
+                    b.HasIndex("Clientes_Cnpj_Id");
 
                     b.ToTable("TB_ENDERECOS");
                 });
@@ -607,6 +621,31 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Navigation("Produto");
                 });
 
+            modelBuilder.Entity("marktplace_sistem.models.Enderecos", b =>
+                {
+                    b.HasOne("marktplace_sistem.models.Clientes_CPF", null)
+                        .WithMany("Enderecos")
+                        .HasForeignKey("Clientes_CPFId");
+
+                    b.HasOne("marktplace_sistem.models.Clientes_CPF", "Clientes_CPF")
+                        .WithMany()
+                        .HasForeignKey("Clientes_CPF_Id")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("marktplace_sistem.models.Clientes_Cnpj", null)
+                        .WithMany("Enderecos")
+                        .HasForeignKey("Clientes_CnpjId");
+
+                    b.HasOne("marktplace_sistem.models.Clientes_Cnpj", "Clientes_Cnpj")
+                        .WithMany()
+                        .HasForeignKey("Clientes_Cnpj_Id")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Clientes_CPF");
+
+                    b.Navigation("Clientes_Cnpj");
+                });
+
             modelBuilder.Entity("marktplace_sistem.models.Fornecedor_Produto", b =>
                 {
                     b.HasOne("marktplace_sistem.models.Fornecedores", "Fornecedores")
@@ -728,6 +767,16 @@ namespace marktplace_sistem.Controllers.Migrations
             modelBuilder.Entity("marktplace_sistem.models.Categoria", b =>
                 {
                     b.Navigation("Produtos");
+                });
+
+            modelBuilder.Entity("marktplace_sistem.models.Clientes_CPF", b =>
+                {
+                    b.Navigation("Enderecos");
+                });
+
+            modelBuilder.Entity("marktplace_sistem.models.Clientes_Cnpj", b =>
+                {
+                    b.Navigation("Enderecos");
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Estoque", b =>

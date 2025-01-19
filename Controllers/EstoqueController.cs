@@ -75,7 +75,7 @@ namespace marktplace_sistem.Controllers
                 await _context.TB_ESTOQUE.AddAsync(novoEstoque);
                 await _context.SaveChangesAsync();
 
-                string mensagem = $"Estoque adiciona ao Sistema com o Id{novoEstoque.Id}";
+                string mensagem = $"Estoque adiciona ao Sistema com o Id: {novoEstoque.Id}";
 
                 return Ok(mensagem);
 
