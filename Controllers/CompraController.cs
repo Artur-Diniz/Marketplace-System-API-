@@ -74,7 +74,7 @@ namespace marktplace_sistem.Controllers
                 Produto produto = await _context.TB_PRODUTOS
                     .FirstOrDefaultAsync(p => p.Id == compras.Id_produto);
 
-                Fornecedores fornecedor = await _context.TB_FORNEDORES
+                Fornecedores fornecedor = await _context.TB_FORNECEDORES
                 .FirstOrDefaultAsync(p => p.Id == compras.Id_fornecedor);
 
                 compras.Produto = produto;
@@ -103,7 +103,7 @@ namespace marktplace_sistem.Controllers
                 Produto produto = await _context.TB_PRODUTOS
                     .FirstOrDefaultAsync(p => p.Id == compras.Id_produto);
 
-                Fornecedores fornecedor = await _context.TB_FORNEDORES
+                Fornecedores fornecedor = await _context.TB_FORNECEDORES
                 .FirstOrDefaultAsync(p => p.Id == compras.Id_fornecedor);
 
                 compras.Produto = produto;

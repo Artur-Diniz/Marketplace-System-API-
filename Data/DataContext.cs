@@ -26,7 +26,7 @@ namespace marktplace_sistem.Data
 
         public DbSet<Fornecedor_Produto> TB_FORNECEDOR_PRODUTO { get; set; }
 
-        public DbSet<Fornecedores> TB_FORNEDORES { get; set; }
+        public DbSet<Fornecedores> TB_FORNECEDORES { get; set; }
 
         public DbSet<Historico_precos> TB_HISTORICO_PRECOS { get; set; }
 
