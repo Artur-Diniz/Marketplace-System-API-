@@ -32,7 +32,7 @@ namespace marktplace_sistem.Data
 
         public DbSet<Impostos> TB_IMPOSTOS { get; set; }
 
-        public DbSet<Itens_Pedidos> TB_INTES_PEDIDOS { get; set; }
+        public DbSet<Itens_Pedidos> TB_ITENS_PEDIDOS { get; set; }
 
         public DbSet<Lucros> TB_LUCROS { get; set; }
 
