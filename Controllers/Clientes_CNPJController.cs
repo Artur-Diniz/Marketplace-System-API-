@@ -116,6 +116,12 @@ namespace marktplace_sistem.Controllers
             {
                 _context.TB_CLIENTES_CNPJ.Update(clientes);
 
+                
+
+                Clientes_Cnpj clientes_Cnpj = await _context
+                .TB_CLIENTES_CNPJ.FirstOrDefaultAsync(c => c.Id == clientes.Id);
+
+                clientes.Cnpj=clientes_Cnpj.Cnpj;
 
                 int linhasAfetadas = await _context.SaveChangesAsync();
 
