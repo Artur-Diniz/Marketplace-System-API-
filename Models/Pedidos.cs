@@ -7,6 +7,7 @@ namespace marktplace_sistem.models
     public class Pedidos
     {
         public int Id { get; set; }
+        
         public int? Id_Cliente_CPF { get; set; }
         [JsonIgnore]
         public Clientes_CPF Clientes_CPF { get; set; }
