@@ -60,7 +60,7 @@ namespace marktplace_sistem.Controllers
         #endregion
 
         [HttpPost]
-        public async Task<IActionResult> Post(Enderecos enderecos)
+        public async Task<IActionResult> AddEndercos(Enderecos enderecos)
         {
             try
             {
