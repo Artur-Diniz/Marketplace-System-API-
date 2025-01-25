@@ -55,6 +55,26 @@ namespace marktplace_sistem.Controllers
             }
         }
 
+        [HttpGet("Produto/{id}")]
+        public async Task<IActionResult> GetProdutoId(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Historico_precos historico_Precos = await _context
+                .TB_HISTORICO_PRECOS.FirstOrDefaultAsync(hp => hp.Id_produto == id);
+
+                if (historico_Precos == null)
+                    throw new Exception("ID não encontrado.");
+                return Ok(historico_Precos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         #endregion
 
         [HttpPost]
@@ -119,7 +139,7 @@ namespace marktplace_sistem.Controllers
                     throw new Exception("ID não encontrado.");
 
                 _context.TB_HISTORICO_PRECOS.Remove(historico_Precos);
-               
+
                 int linhasAfetadas = await _context.SaveChangesAsync();
 
                 return Ok(linhasAfetadas);
