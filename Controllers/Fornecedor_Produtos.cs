@@ -33,7 +33,6 @@ namespace marktplace_sistem.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpGet("{id}")]
