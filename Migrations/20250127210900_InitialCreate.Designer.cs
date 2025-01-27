@@ -12,7 +12,7 @@ using marktplace_sistem.Data;
 namespace marktplace_sistem.Controllers.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250127205150_InitialCreate")]
+    [Migration("20250127210900_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -255,7 +255,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<int>("Quantidade_reservada")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Ultima_Atualicacao")
+                    b.Property<DateTime>("Ultima_Atualizacao")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

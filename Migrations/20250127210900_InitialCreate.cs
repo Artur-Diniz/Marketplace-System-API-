@@ -75,7 +75,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     Quantidade = table.Column<int>(type: "int", nullable: false),
                     Quantidade_reservada = table.Column<int>(type: "int", nullable: false),
                     Quantidade_disponivel = table.Column<int>(type: "int", nullable: false),
-                    Ultima_Atualicacao = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Ultima_Atualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

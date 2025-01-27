@@ -252,7 +252,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<int>("Quantidade_reservada")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Ultima_Atualicacao")
+                    b.Property<DateTime>("Ultima_Atualizacao")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

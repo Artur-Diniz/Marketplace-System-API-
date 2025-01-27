@@ -16,7 +16,7 @@ namespace marktplace_sistem.models
         public int Quantidade { get; set; }
         public int Quantidade_reservada { get; set; }// quantidade vendinda porém ainda no estoque
         public int Quantidade_disponivel { get; set; }// Quantidade - quantidade Reservada 
-        public DateTime Ultima_Atualicacao { get; set; }
+        public DateTime Ultima_Atualizacao { get; set; }
 
     }
 

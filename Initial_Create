@@ -46,7 +46,7 @@ CREATE TABLE [TB_ESTOQUE] (
     [Quantidade] int NOT NULL,
     [Quantidade_reservada] int NOT NULL,
     [Quantidade_disponivel] int NOT NULL,
-    [Ultima_Atualicacao] datetime2 NOT NULL,
+    [Ultima_Atualizacao] datetime2 NOT NULL,
     CONSTRAINT [PK_TB_ESTOQUE] PRIMARY KEY ([Id])
 );
 
@@ -254,7 +254,7 @@ CREATE INDEX [IX_TB_PRODUTOS_Id_categoria] ON [TB_PRODUTOS] ([Id_categoria]);
 CREATE UNIQUE INDEX [IX_TB_PRODUTOS_Id_Estoque] ON [TB_PRODUTOS] ([Id_Estoque]);
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20250127205150_InitialCreate', N'9.0.1');
+VALUES (N'20250127210900_InitialCreate', N'9.0.1');
 
 COMMIT;
 GO

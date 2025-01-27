@@ -60,6 +60,85 @@ namespace marktplace_sistem.Controllers
 
         }
 
+        [HttpGet("Produto/{id}")]
+        public async Task<IActionResult> GetProduto(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+
+                Estoque estoque = await _context.TB_ESTOQUE
+                .Include(e => e.Produto)
+                .FirstOrDefaultAsync(e => e.Id_Produto == id);
+
+                if (estoque == null)
+                    throw new Exception("ID não encontrado.");
+
+
+                return Ok(estoque);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetQuantidade")]
+        public async Task<IActionResult> getQuantidade()
+        {
+            try
+            {
+                List<Estoque> lista = await _context.TB_ESTOQUE
+                .OrderBy(e => e.Quantidade)
+                .ToListAsync();
+
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("GetQuantidadeDisponivel")]
+        public async Task<IActionResult> getQuantidadedisponivel()
+        {
+            try
+            {
+                List<Estoque> lista = await _context.TB_ESTOQUE
+                .OrderBy(e => e.Quantidade_disponivel)
+                .ToListAsync();
+
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("GetData")]
+        public async Task<IActionResult> getData()
+        {
+            try
+            {
+                List<Estoque> lista = await _context.TB_ESTOQUE
+                    .OrderByDescending(e => e.Ultima_Atualizacao)  
+                    .ToListAsync();
+
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         #endregion
 
         [HttpPost]
