@@ -59,6 +59,39 @@ namespace marktplace_sistem.Controllers
 
         }
 
+        [HttpGet("Produtos/{id}")]
+        public async Task<IActionResult> getProduto(int id)
+        {
+            try
+            {
+                List<Fornecedor_Produto> fornecedor_Produtos = await _context
+                .TB_FORNECEDOR_PRODUTO.Where(e => e.Id_Produto == id).ToListAsync();
+
+                return Ok(fornecedor_Produtos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Fornecedor/{id}")]
+        public async Task<IActionResult> getFornecedor(int id)
+        {
+            try
+            {
+                List<Fornecedor_Produto> FORNECEDOR_PRODUTO = await _context
+                .TB_FORNECEDOR_PRODUTO.Where(e => e.Id_Fornecedor == id).ToListAsync();
+
+                return Ok(FORNECEDOR_PRODUTO);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         #endregion
 
         [HttpPost]

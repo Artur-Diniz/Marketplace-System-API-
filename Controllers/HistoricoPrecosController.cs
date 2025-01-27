@@ -17,6 +17,7 @@ namespace marktplace_sistem.Controllers
         }
 
         #region Get
+
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -75,6 +76,55 @@ namespace marktplace_sistem.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("Data")]
+        public async Task<IActionResult> GetData()
+        {
+            try
+            {
+                List<Historico_precos> historico_Precos = await _context
+                .TB_HISTORICO_PRECOS.OrderBy(c => c.data_inicio).ToListAsync();
+
+                return Ok(historico_Precos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("MenorPreco")]
+        public async Task<IActionResult> GetmenorPreco()
+        {
+            try
+            {
+                List<Historico_precos> historico_Precos = await _context
+                .TB_HISTORICO_PRECOS.OrderBy(c => c.preco_venda).ToListAsync();
+
+                return Ok(historico_Precos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("MaiorPreco")]
+        public async Task<IActionResult> GetMaiorPreco()
+        {
+            try
+            {
+                List<Historico_precos> historico_Precos = await _context
+                .TB_HISTORICO_PRECOS.OrderByDescending(c => c.preco_venda).ToListAsync();
+
+                return Ok(historico_Precos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
         #endregion
 
         [HttpPost]

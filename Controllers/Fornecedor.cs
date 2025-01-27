@@ -61,6 +61,50 @@ namespace marktplace_sistem.Controllers
         }
 
 
+        [HttpGet("Nome/{nome}")]
+        public async Task<IActionResult> GetNome(string nome)
+        {
+            try
+            {
+                List<Fornecedores> lista = await _context.TB_FORNECEDORES
+                .Where(c => c.Nome.ToLower().Contains(nome.ToLower()))
+                .ToListAsync();
+
+                if (lista == null)
+                {
+                    throw new Exception("Fornecedor não encontrado");
+                }
+
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("FornecedorAtivo")]
+        public async Task<IActionResult> GetAtivo()
+        {
+            try
+            {
+                List<Fornecedores> lista = await _context.TB_FORNECEDORES
+                    .Where(c => c.Fornecedor_Ativo==true)
+                    .ToListAsync();
+
+                if (lista == null)
+                {
+                    throw new Exception("Fornecedor não encontrado");
+                }
+
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         #endregion
 
 
