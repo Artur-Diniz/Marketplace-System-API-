@@ -181,6 +181,11 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<string>("Bairro")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Cep")
+                        .HasMaxLength(8)
+                        .HasColumnType("int")
+                        .IsFixedLength();
+
                     b.Property<string>("Cidade")
                         .HasColumnType("nvarchar(max)");
 

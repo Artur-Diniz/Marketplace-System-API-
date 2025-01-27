@@ -112,6 +112,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     Cidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UF = table.Column<string>(type: "nchar(2)", fixedLength: true, maxLength: 2, nullable: false),
                     Pais = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cep = table.Column<int>(type: "int", fixedLength: true, maxLength: 8, nullable: false),
                     Clientes_Cnpj_Id = table.Column<int>(type: "int", nullable: true),
                     Clientes_CPF_Id = table.Column<int>(type: "int", nullable: true),
                     Clientes_CPFId = table.Column<int>(type: "int", nullable: true),

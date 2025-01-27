@@ -14,6 +14,7 @@ namespace marktplace_sistem.models
         public string UF { get; set; } = string.Empty;//lembrar de setar 2 casas 
         public string Pais { get; set; } = string.Empty;
 
+        public int Cep { get; set; }
 
         public int? Clientes_Cnpj_Id { get; set; }
         public Clientes_Cnpj Clientes_Cnpj { get; set; }

@@ -57,6 +57,84 @@ namespace marktplace_sistem.Controllers
             }
         }
 
+        [HttpGet("ClienteCPF/{id}")]
+        public async Task<IActionResult> GetIdClienteCPF(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Enderecos enderecos = await _context
+                .TB_ENDERECOS.FirstOrDefaultAsync(e => e.Clientes_CPF_Id == id);
+
+                if (enderecos == null)
+                    throw new Exception("ID não encontrado.");
+
+                return Ok(enderecos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("ClienteCnpj/{id}")]
+        public async Task<IActionResult> GetIdClienteCnpj(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Enderecos enderecos = await _context
+                .TB_ENDERECOS.FirstOrDefaultAsync(e => e.Clientes_Cnpj_Id == id);
+
+                if (enderecos == null)
+                    throw new Exception("ID não encontrado.");
+
+                return Ok(enderecos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetUF/{UF}")]
+        public async Task<IActionResult> GetUF(string UF)
+        {
+            try
+            {
+                List<Enderecos> enderecos = await _context.TB_ENDERECOS
+                .Where(c => c.UF.ToLower().Contains(UF.ToLower()))
+                .ToListAsync();
+
+                return Ok(enderecos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetCidade/{cidade}")]
+        public async Task<IActionResult> GetCidade(string cidade)
+        {
+            try
+            {
+                List<Enderecos> enderecos = await _context.TB_ENDERECOS
+                .Where(c => c.Cidade.ToLower().Contains(cidade.ToLower()))
+                .ToListAsync();
+
+                return Ok(enderecos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
         #endregion
 
         [HttpPost]

@@ -12,7 +12,7 @@ using marktplace_sistem.Data;
 namespace marktplace_sistem.Controllers.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250127190607_InitialCreate")]
+    [Migration("20250127205150_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -183,6 +183,11 @@ namespace marktplace_sistem.Controllers.Migrations
 
                     b.Property<string>("Bairro")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Cep")
+                        .HasMaxLength(8)
+                        .HasColumnType("int")
+                        .IsFixedLength();
 
                     b.Property<string>("Cidade")
                         .HasColumnType("nvarchar(max)");

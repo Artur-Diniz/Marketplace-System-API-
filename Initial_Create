@@ -69,6 +69,7 @@ CREATE TABLE [TB_ENDERECOS] (
     [Cidade] nvarchar(max) NULL,
     [UF] nchar(2) NOT NULL,
     [Pais] nvarchar(max) NULL,
+    [Cep] int NOT NULL,
     [Clientes_Cnpj_Id] int NULL,
     [Clientes_CPF_Id] int NULL,
     [Clientes_CPFId] int NULL,
@@ -253,7 +254,7 @@ CREATE INDEX [IX_TB_PRODUTOS_Id_categoria] ON [TB_PRODUTOS] ([Id_categoria]);
 CREATE UNIQUE INDEX [IX_TB_PRODUTOS_Id_Estoque] ON [TB_PRODUTOS] ([Id_Estoque]);
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20250127190607_InitialCreate', N'9.0.1');
+VALUES (N'20250127205150_InitialCreate', N'9.0.1');
 
 COMMIT;
 GO

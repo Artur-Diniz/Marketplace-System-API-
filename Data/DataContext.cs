@@ -24,7 +24,7 @@ namespace marktplace_sistem.Data
 
         public DbSet<Estoque> TB_ESTOQUE { get; set; }
 
-        public DbSet<Fornecedor_Produto> TB_FORNECEDOR_PRODUTO  { get; set; }
+        public DbSet<Fornecedor_Produto> TB_FORNECEDOR_PRODUTO { get; set; }
 
         public DbSet<Fornecedores> TB_FORNECEDORES { get; set; }
 
@@ -56,25 +56,25 @@ namespace marktplace_sistem.Data
                 .HasOne(p => p.Clientes_CPF)
                 .WithMany()
                 .HasForeignKey(p => p.Id_Cliente_CPF)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
 
-             modelBuilder.Entity<Pedidos>()
-                .HasOne(p => p.Clientes_CNPJ)
-                .WithMany()
-                .HasForeignKey(p => p.Id_Cliente_CNPJ)
-                .OnDelete(DeleteBehavior.Restrict); 
-            
-             modelBuilder.Entity<Enderecos>()
-                .HasOne(p => p.Clientes_Cnpj)
-                .WithMany()
-                .HasForeignKey(p => p.Clientes_Cnpj_Id)
-                .OnDelete(DeleteBehavior.Restrict); 
+            modelBuilder.Entity<Pedidos>()
+               .HasOne(p => p.Clientes_CNPJ)
+               .WithMany()
+               .HasForeignKey(p => p.Id_Cliente_CNPJ)
+               .OnDelete(DeleteBehavior.Restrict);
 
-             modelBuilder.Entity<Enderecos>()
-                .HasOne(p => p.Clientes_CPF)
-                .WithMany()
-                .HasForeignKey(p => p.Clientes_CPF_Id)
-                .OnDelete(DeleteBehavior.Restrict); 
+            modelBuilder.Entity<Enderecos>()
+               .HasOne(p => p.Clientes_Cnpj)
+               .WithMany()
+               .HasForeignKey(p => p.Clientes_Cnpj_Id)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Enderecos>()
+               .HasOne(p => p.Clientes_CPF)
+               .WithMany()
+               .HasForeignKey(p => p.Clientes_CPF_Id)
+               .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Fornecedor_Produto>(entity =>
             {
@@ -190,6 +190,11 @@ namespace marktplace_sistem.Data
                 .IsFixedLength()
                 .IsRequired();
 
+            modelBuilder.Entity<Enderecos>()
+                .Property(e => e.Cep)
+                .HasMaxLength(8) 
+                .IsFixedLength()
+                .IsRequired();
 
 
             #region Objetos Base
