@@ -301,7 +301,7 @@ namespace marktplace_sistem.Controllers.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TB_FORNEDORES");
+                    b.ToTable("TB_FORNECEDORES");
 
                     b.HasData(
                         new
@@ -411,7 +411,7 @@ namespace marktplace_sistem.Controllers.Migrations
 
                     b.HasIndex("Id_produto");
 
-                    b.ToTable("TB_INTES_PEDIDOS");
+                    b.ToTable("TB_ITENS_PEDIDOS");
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Lucros", b =>

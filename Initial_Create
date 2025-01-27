@@ -50,14 +50,14 @@ CREATE TABLE [TB_ESTOQUE] (
     CONSTRAINT [PK_TB_ESTOQUE] PRIMARY KEY ([Id])
 );
 
-CREATE TABLE [TB_FORNEDORES] (
+CREATE TABLE [TB_FORNECEDORES] (
     [Id] int NOT NULL IDENTITY,
     [cnpj] nchar(14) NOT NULL,
     [Nome] nvarchar(max) NULL,
     [Telefone] int NOT NULL,
     [Email] nvarchar(max) NULL,
     [Fornecedor_Ativo] bit NOT NULL,
-    CONSTRAINT [PK_TB_FORNEDORES] PRIMARY KEY ([Id])
+    CONSTRAINT [PK_TB_FORNECEDORES] PRIMARY KEY ([Id])
 );
 
 CREATE TABLE [TB_ENDERECOS] (
@@ -122,16 +122,16 @@ CREATE TABLE [TB_COMPRAS] (
     [Status] int NOT NULL,
     [data_compra] datetime2 NOT NULL,
     CONSTRAINT [PK_TB_COMPRAS] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_TB_COMPRAS_TB_FORNEDORES_Id_fornecedor] FOREIGN KEY ([Id_fornecedor]) REFERENCES [TB_FORNEDORES] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_TB_COMPRAS_TB_FORNECEDORES_Id_fornecedor] FOREIGN KEY ([Id_fornecedor]) REFERENCES [TB_FORNECEDORES] ([Id]) ON DELETE CASCADE,
     CONSTRAINT [FK_TB_COMPRAS_TB_PRODUTOS_Id_produto] FOREIGN KEY ([Id_produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
 );
 
 CREATE TABLE [TB_FORNECEDOR_PRODUTO] (
-    [Id_Produto] int NOT NULL,
     [Id_Fornecedor] int NOT NULL,
+    [Id_Produto] int NOT NULL,
     [Descricao] nvarchar(max) NULL,
     CONSTRAINT [PK_TB_FORNECEDOR_PRODUTO] PRIMARY KEY ([Id_Fornecedor], [Id_Produto]),
-    CONSTRAINT [FK_TB_FORNECEDOR_PRODUTO_TB_FORNEDORES_Id_Fornecedor] FOREIGN KEY ([Id_Fornecedor]) REFERENCES [TB_FORNEDORES] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_TB_FORNECEDOR_PRODUTO_TB_FORNECEDORES_Id_Fornecedor] FOREIGN KEY ([Id_Fornecedor]) REFERENCES [TB_FORNECEDORES] ([Id]) ON DELETE CASCADE,
     CONSTRAINT [FK_TB_FORNECEDOR_PRODUTO_TB_PRODUTOS_Id_Produto] FOREIGN KEY ([Id_Produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
 );
 
@@ -157,15 +157,15 @@ CREATE TABLE [TB_IMPOSTOS] (
     CONSTRAINT [FK_TB_IMPOSTOS_TB_PRODUTOS_Id_produto] FOREIGN KEY ([Id_produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
 );
 
-CREATE TABLE [TB_INTES_PEDIDOS] (
+CREATE TABLE [TB_ITENS_PEDIDOS] (
     [Id] int NOT NULL IDENTITY,
     [Id_pedido] int NOT NULL,
     [Id_produto] int NOT NULL,
     [quantidade] int NOT NULL,
     [preco_unitario] int NOT NULL,
-    CONSTRAINT [PK_TB_INTES_PEDIDOS] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_TB_INTES_PEDIDOS_TB_PEDIDOS_Id_pedido] FOREIGN KEY ([Id_pedido]) REFERENCES [TB_PEDIDOS] ([Id]) ON DELETE CASCADE,
-    CONSTRAINT [FK_TB_INTES_PEDIDOS_TB_PRODUTOS_Id_produto] FOREIGN KEY ([Id_produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
+    CONSTRAINT [PK_TB_ITENS_PEDIDOS] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_TB_ITENS_PEDIDOS_TB_PEDIDOS_Id_pedido] FOREIGN KEY ([Id_pedido]) REFERENCES [TB_PEDIDOS] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_TB_ITENS_PEDIDOS_TB_PRODUTOS_Id_produto] FOREIGN KEY ([Id_produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
 );
 
 CREATE TABLE [TB_LUCROS] (
@@ -202,13 +202,13 @@ VALUES (1, N'Camisas e camisetas', N'Camisetas'),
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Descricao', N'Nome') AND [object_id] = OBJECT_ID(N'[TB_CATEGORIAS]'))
     SET IDENTITY_INSERT [TB_CATEGORIAS] OFF;
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Email', N'Fornecedor_Ativo', N'Nome', N'Telefone', N'cnpj') AND [object_id] = OBJECT_ID(N'[TB_FORNEDORES]'))
-    SET IDENTITY_INSERT [TB_FORNEDORES] ON;
-INSERT INTO [TB_FORNEDORES] ([Id], [Email], [Fornecedor_Ativo], [Nome], [Telefone], [cnpj])
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Email', N'Fornecedor_Ativo', N'Nome', N'Telefone', N'cnpj') AND [object_id] = OBJECT_ID(N'[TB_FORNECEDORES]'))
+    SET IDENTITY_INSERT [TB_FORNECEDORES] ON;
+INSERT INTO [TB_FORNECEDORES] ([Id], [Email], [Fornecedor_Ativo], [Nome], [Telefone], [cnpj])
 VALUES (1, N'jonas@gmail.com', CAST(1 AS bit), N'Jonas', 1124311717, N'12312312312321'),
 (2, N'Jonathan@gmail.com', CAST(1 AS bit), N'Jonathan', 1124311743, N'32132132132123');
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Email', N'Fornecedor_Ativo', N'Nome', N'Telefone', N'cnpj') AND [object_id] = OBJECT_ID(N'[TB_FORNEDORES]'))
-    SET IDENTITY_INSERT [TB_FORNEDORES] OFF;
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Email', N'Fornecedor_Ativo', N'Nome', N'Telefone', N'cnpj') AND [object_id] = OBJECT_ID(N'[TB_FORNECEDORES]'))
+    SET IDENTITY_INSERT [TB_FORNECEDORES] OFF;
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Codigo', N'Cor', N'Id_Estoque', N'Id_categoria', N'Image_Url', N'Nome', N'Produto_Ativo', N'Tamanho', N'data_criacao', N'data_ultimaAlteracao') AND [object_id] = OBJECT_ID(N'[TB_PRODUTOS]'))
     SET IDENTITY_INSERT [TB_PRODUTOS] ON;
@@ -236,9 +236,9 @@ CREATE INDEX [IX_TB_HISTORICO_PRECOS_Id_produto] ON [TB_HISTORICO_PRECOS] ([Id_p
 
 CREATE UNIQUE INDEX [IX_TB_IMPOSTOS_Id_produto] ON [TB_IMPOSTOS] ([Id_produto]);
 
-CREATE INDEX [IX_TB_INTES_PEDIDOS_Id_pedido] ON [TB_INTES_PEDIDOS] ([Id_pedido]);
+CREATE INDEX [IX_TB_ITENS_PEDIDOS_Id_pedido] ON [TB_ITENS_PEDIDOS] ([Id_pedido]);
 
-CREATE INDEX [IX_TB_INTES_PEDIDOS_Id_produto] ON [TB_INTES_PEDIDOS] ([Id_produto]);
+CREATE INDEX [IX_TB_ITENS_PEDIDOS_Id_produto] ON [TB_ITENS_PEDIDOS] ([Id_produto]);
 
 CREATE INDEX [IX_TB_LUCROS_Id_produto] ON [TB_LUCROS] ([Id_produto]);
 
@@ -253,7 +253,7 @@ CREATE INDEX [IX_TB_PRODUTOS_Id_categoria] ON [TB_PRODUTOS] ([Id_categoria]);
 CREATE UNIQUE INDEX [IX_TB_PRODUTOS_Id_Estoque] ON [TB_PRODUTOS] ([Id_Estoque]);
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20250119005424_InitialCreate', N'9.0.1');
+VALUES (N'20250127190607_InitialCreate', N'9.0.1');
 
 COMMIT;
 GO

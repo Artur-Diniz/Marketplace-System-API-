@@ -75,6 +75,8 @@ namespace marktplace_sistem.Controllers
             }
         }
 
+        
+
         #endregion
 
         [HttpPost]

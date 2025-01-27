@@ -87,6 +87,51 @@ namespace marktplace_sistem.Controllers
 
         }
 
+        [HttpGet("GetByNome/{nome}")]
+        public async Task<IActionResult> GetByNomeAproximado(string nome)
+        {
+            try
+            {
+                List<Clientes_Cnpj> lista = await _context.TB_CLIENTES_CNPJ
+                .Where(c => c.Nome.ToLower().Contains(nome.ToLower()))
+                .ToListAsync();
+
+                if (lista == null)
+                {
+                    throw new Exception("Categoria não encontrada");
+                }
+
+                return Ok(lista);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetAll/Ativos")]
+        public async Task<IActionResult> GetByStatus()
+        {
+            try
+            {
+                List<Clientes_Cnpj> lista = await _context.TB_CLIENTES_CNPJ
+                .Where(c => c.Status == ClientesEnum.Ativo)
+                .ToListAsync();
+
+                if (lista == null)
+                {
+                    throw new Exception("Categoria não encontrada");
+                }
+
+                return Ok(lista);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         #endregion
 
         [HttpPost]
@@ -94,6 +139,12 @@ namespace marktplace_sistem.Controllers
         {
             try
             {
+                Clientes_Cnpj cl = await _context
+                .TB_CLIENTES_CNPJ.FirstOrDefaultAsync(c => c.Cnpj == clientes.Cnpj);
+
+                if (cl != null)
+                    throw new Exception("cnpj ja registrado no sistema.");
+
                 await _context.TB_CLIENTES_CNPJ.AddAsync(clientes);
                 await _context.SaveChangesAsync();
 
@@ -116,12 +167,12 @@ namespace marktplace_sistem.Controllers
             {
                 _context.TB_CLIENTES_CNPJ.Update(clientes);
 
-                
+
 
                 Clientes_Cnpj clientes_Cnpj = await _context
                 .TB_CLIENTES_CNPJ.FirstOrDefaultAsync(c => c.Id == clientes.Id);
 
-                clientes.Cnpj=clientes_Cnpj.Cnpj;
+                clientes.Cnpj = clientes_Cnpj.Cnpj;
 
                 int linhasAfetadas = await _context.SaveChangesAsync();
 

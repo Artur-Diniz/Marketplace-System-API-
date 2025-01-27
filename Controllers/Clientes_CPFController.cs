@@ -85,6 +85,52 @@ namespace marktplace_sistem.Controllers
 
         }
 
+        [HttpGet("GetByNome/{nome}")]
+        public async Task<IActionResult> GetByNomeAproximado(string nome)
+        {
+            try
+            {
+                List<Clientes_CPF> lista = await _context.TB_CLIENTES_CPF
+                .Where(c => c.Nome.ToLower().Contains(nome.ToLower()))
+                .ToListAsync();
+
+                if (lista == null)
+                {
+                    throw new Exception("Categoria não encontrada");
+                }
+
+                return Ok(lista);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetAll/Ativos")]
+        public async Task<IActionResult> GetByStatus()
+        {
+            try
+            {
+                List<Clientes_CPF> lista = await _context.TB_CLIENTES_CPF
+                .Where(c => c.Status == ClientesEnum.Ativo)
+                .ToListAsync();
+
+                if (lista == null)
+                {
+                    throw new Exception("Categoria não encontrada");
+                }
+
+                return Ok(lista);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
         #endregion
 
         [HttpPost]
@@ -92,6 +138,13 @@ namespace marktplace_sistem.Controllers
         {
             try
             {
+                Clientes_CPF cl = await _context
+           .TB_CLIENTES_CPF.FirstOrDefaultAsync(c => c.CPF == clientes.CPF);
+
+                if (cl != null)
+                    throw new Exception("Cpf ja registrado no sistema.");
+
+
                 await _context.TB_CLIENTES_CPF.AddAsync(clientes);
                 await _context.SaveChangesAsync();
 

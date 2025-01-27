@@ -83,7 +83,7 @@ namespace marktplace_sistem.Controllers.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TB_FORNEDORES",
+                name: "TB_FORNECEDORES",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -96,7 +96,7 @@ namespace marktplace_sistem.Controllers.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_FORNEDORES", x => x.Id);
+                    table.PrimaryKey("PK_TB_FORNECEDORES", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,9 +228,9 @@ namespace marktplace_sistem.Controllers.Migrations
                 {
                     table.PrimaryKey("PK_TB_COMPRAS", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TB_COMPRAS_TB_FORNEDORES_Id_fornecedor",
+                        name: "FK_TB_COMPRAS_TB_FORNECEDORES_Id_fornecedor",
                         column: x => x.Id_fornecedor,
-                        principalTable: "TB_FORNEDORES",
+                        principalTable: "TB_FORNECEDORES",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -245,17 +245,17 @@ namespace marktplace_sistem.Controllers.Migrations
                 name: "TB_FORNECEDOR_PRODUTO",
                 columns: table => new
                 {
-                    Id_Produto = table.Column<int>(type: "int", nullable: false),
                     Id_Fornecedor = table.Column<int>(type: "int", nullable: false),
+                    Id_Produto = table.Column<int>(type: "int", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_FORNECEDOR_PRODUTO", x => new { x.Id_Fornecedor, x.Id_Produto });
                     table.ForeignKey(
-                        name: "FK_TB_FORNECEDOR_PRODUTO_TB_FORNEDORES_Id_Fornecedor",
+                        name: "FK_TB_FORNECEDOR_PRODUTO_TB_FORNECEDORES_Id_Fornecedor",
                         column: x => x.Id_Fornecedor,
-                        principalTable: "TB_FORNEDORES",
+                        principalTable: "TB_FORNECEDORES",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -313,7 +313,7 @@ namespace marktplace_sistem.Controllers.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TB_INTES_PEDIDOS",
+                name: "TB_ITENS_PEDIDOS",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -325,15 +325,15 @@ namespace marktplace_sistem.Controllers.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_INTES_PEDIDOS", x => x.Id);
+                    table.PrimaryKey("PK_TB_ITENS_PEDIDOS", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TB_INTES_PEDIDOS_TB_PEDIDOS_Id_pedido",
+                        name: "FK_TB_ITENS_PEDIDOS_TB_PEDIDOS_Id_pedido",
                         column: x => x.Id_pedido,
                         principalTable: "TB_PEDIDOS",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TB_INTES_PEDIDOS_TB_PRODUTOS_Id_produto",
+                        name: "FK_TB_ITENS_PEDIDOS_TB_PRODUTOS_Id_produto",
                         column: x => x.Id_produto,
                         principalTable: "TB_PRODUTOS",
                         principalColumn: "Id",
@@ -400,7 +400,7 @@ namespace marktplace_sistem.Controllers.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "TB_FORNEDORES",
+                table: "TB_FORNECEDORES",
                 columns: new[] { "Id", "Email", "Fornecedor_Ativo", "Nome", "Telefone", "cnpj" },
                 values: new object[,]
                 {
@@ -464,13 +464,13 @@ namespace marktplace_sistem.Controllers.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_INTES_PEDIDOS_Id_pedido",
-                table: "TB_INTES_PEDIDOS",
+                name: "IX_TB_ITENS_PEDIDOS_Id_pedido",
+                table: "TB_ITENS_PEDIDOS",
                 column: "Id_pedido");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_INTES_PEDIDOS_Id_produto",
-                table: "TB_INTES_PEDIDOS",
+                name: "IX_TB_ITENS_PEDIDOS_Id_produto",
+                table: "TB_ITENS_PEDIDOS",
                 column: "Id_produto");
 
             migrationBuilder.CreateIndex(
@@ -524,7 +524,7 @@ namespace marktplace_sistem.Controllers.Migrations
                 name: "TB_IMPOSTOS");
 
             migrationBuilder.DropTable(
-                name: "TB_INTES_PEDIDOS");
+                name: "TB_ITENS_PEDIDOS");
 
             migrationBuilder.DropTable(
                 name: "TB_LUCROS");
@@ -533,7 +533,7 @@ namespace marktplace_sistem.Controllers.Migrations
                 name: "TB_PRECOS");
 
             migrationBuilder.DropTable(
-                name: "TB_FORNEDORES");
+                name: "TB_FORNECEDORES");
 
             migrationBuilder.DropTable(
                 name: "TB_PEDIDOS");

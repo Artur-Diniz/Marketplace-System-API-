@@ -60,6 +60,56 @@ namespace marktplace_sistem.Controllers
             }
         }
 
+        [HttpGet("produto/{produtoId}")]
+        public async Task<IActionResult> GetCategoriaByProdutoId(int produtoId)
+        {
+            try
+            {
+                if (produtoId == 0)
+                {
+                    throw new Exception("O ID do produto não pode ser igual a zero.");
+                }
+
+                var categoria = await _context.TB_CATEGORIAS
+                    .Include(c => c.Produtos)
+                    .FirstOrDefaultAsync(c => c.Produtos.Any(p => p.Id == produtoId));
+
+                if (categoria == null)
+                {
+                    throw new Exception("Categoria não encontrada para o produto especificado.");
+                }
+
+                return Ok(categoria);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("GetByNome/{nome}")]
+        public async Task<IActionResult> GetByNomeAproximado(string nome)
+        {
+            try
+            {
+                List<Categoria> lista = await _context.TB_CATEGORIAS
+                .Where(c => c.Nome.ToLower().Contains(nome.ToLower()))
+                .ToListAsync();
+
+                if (lista == null)
+                {
+                    throw new Exception("Categoria não encontrada");
+                }
+
+                return Ok(lista);
+            }   
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         #endregion
 
         [HttpPost]
@@ -128,5 +178,6 @@ namespace marktplace_sistem.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
     }
 }
