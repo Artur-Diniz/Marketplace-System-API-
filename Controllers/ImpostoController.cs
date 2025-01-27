@@ -57,6 +57,46 @@ namespace marktplace_sistem.Controllers
             }
         }
 
+        [HttpGet("Produto/{id}")]
+        public async Task<IActionResult> getProduto(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Impostos impostos = await _context.TB_IMPOSTOS
+                .FirstOrDefaultAsync(i => i.Id_produto == id);
+
+                if (impostos == null)
+                    throw new Exception("ID não encontrado.");
+
+
+                return Ok(impostos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("Data")]
+        public async Task<IActionResult> GetData()
+        {
+            try
+            {
+                List<Impostos> impostos = await _context
+                .TB_IMPOSTOS.OrderBy(i => i.data_inicio).ToListAsync();
+
+                return Ok(impostos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         #endregion
 
         [HttpPost]
@@ -82,6 +122,7 @@ namespace marktplace_sistem.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
 
         [HttpPut]
@@ -135,6 +176,8 @@ namespace marktplace_sistem.Controllers
             }
 
         }
+
+
 
     }
 }

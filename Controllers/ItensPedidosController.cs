@@ -58,6 +58,71 @@ namespace marktplace_sistem.Controllers
 
         }
 
+        [HttpGet("Produto/{id}")]
+        public async Task<IActionResult> getProduto(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Itens_Pedidos itens_Pedido = await _context
+                .TB_ITENS_PEDIDOS.FirstOrDefaultAsync(ip => ip.Id_produto == id);
+
+                if (itens_Pedido == null)
+                    throw new Exception("ID não encontrado.");
+
+                return Ok(itens_Pedido);
+
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Pedido/{id}")]
+        public async Task<IActionResult> getPedido(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Itens_Pedidos itens_Pedido = await _context
+                .TB_ITENS_PEDIDOS.FirstOrDefaultAsync(ip => ip.Id_pedido == id);
+
+                if (itens_Pedido == null)
+                    throw new Exception("ID não encontrado.");
+
+                return Ok(itens_Pedido);
+
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("Quantidade")]
+        public async Task<IActionResult> GetQuantidade()
+        {
+            try
+            {
+                List<Itens_Pedidos> itens_Pedidos = await _context
+                .TB_ITENS_PEDIDOS.OrderBy(i => i.quantidade).ToListAsync();
+
+                return Ok(itens_Pedidos);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
         #endregion
 
         [HttpPost]

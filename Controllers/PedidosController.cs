@@ -59,6 +59,179 @@ namespace marktplace_sistem.Controllers
             }
         }
 
+        [HttpGet("DataPedidoRecente")]
+        public async Task<IActionResult> getDataPedidoRecente()
+        {
+            try
+            {
+
+                List<Pedidos> pedidos = await _context
+                .TB_PEDIDOS.OrderBy(p => p.Data_Pedido).ToListAsync();
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("DataPedidoAntiga")]
+        public async Task<IActionResult> getDataPedidoAntiga()
+        {
+            try
+            {
+
+                List<Pedidos> pedidos = await _context
+                .TB_PEDIDOS.OrderByDescending(p => p.Data_Pedido).ToListAsync();
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("DataEntregaRecente")]
+        public async Task<IActionResult> getDataEntregaRecente()
+        {
+            try
+            {
+
+                List<Pedidos> pedidos = await _context
+                .TB_PEDIDOS.OrderBy(p => p.Data_Entrega).ToListAsync();
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("DataEntregaAntiga")]
+        public async Task<IActionResult> getDataEntregaAntiga()
+        {
+            try
+            {
+
+                List<Pedidos> pedidos = await _context
+                .TB_PEDIDOS.OrderByDescending(p => p.Data_Entrega).ToListAsync();
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("EntragaPendente")]
+        public async Task<IActionResult> getEntragaPendente()
+        {
+            try
+            {
+
+                List<Pedidos> pedidos = await _context
+                .TB_PEDIDOS.Where(p => p.Data_Entrega == null).ToListAsync();
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("ClienteCpf/{cpf}")]
+        public async Task<IActionResult> Getcpf(int cpf)
+        {
+            try
+            {
+                if (cpf == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Pedidos pedidos = await _context
+                .TB_PEDIDOS.FirstOrDefaultAsync(p => p.Id_Cliente_CPF == cpf);
+
+                if (pedidos == null)
+                    throw new Exception("ID não encontrado.");
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("ClienteCNPJ/{CNPJ}")]
+        public async Task<IActionResult> GetCNPJ(int CNPJ)
+        {
+            try
+            {
+                if (CNPJ == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Pedidos pedidos = await _context
+                .TB_PEDIDOS.FirstOrDefaultAsync(p => p.Id_Cliente_CNPJ == CNPJ);
+
+                if (pedidos == null)
+                    throw new Exception("ID não encontrado.");
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("MaiorValor")]
+        public async Task<IActionResult> GetMaiorvalor()
+        {
+            try
+            {
+                List<Pedidos> pedidos = await _context
+                               .TB_PEDIDOS.OrderBy(p => p.Valor_pedido).ToListAsync();
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet("MenorValor")]
+        public async Task<IActionResult> GetMenorvalor()
+        {
+            try
+            {
+                List<Pedidos> pedidos = await _context
+                               .TB_PEDIDOS.OrderByDescending(p => p.Valor_pedido).ToListAsync();
+
+                return Ok(pedidos);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
         #endregion
 
 
