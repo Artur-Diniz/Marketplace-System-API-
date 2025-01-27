@@ -59,9 +59,167 @@ namespace marktplace_sistem.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
-
         }
+
+        [HttpGet("Fornecedor/{id}")]
+        public async Task<IActionResult> GetFornecedor(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Compras compras = await _context.TB_COMPRAS
+                .Include(f => f.Fornecedores)
+                .FirstOrDefaultAsync(f => f.Id_fornecedor == id);
+
+                if (compras == null)
+                    throw new Exception("ID não encontrado.");
+
+                return Ok(compras);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Produto/{id}")]
+        public async Task<IActionResult> GetProduto(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new Exception("O ID não pode ser igual Zero.");
+
+                Compras compras = await _context.TB_COMPRAS
+                .Include(f => f.Produto)
+                .FirstOrDefaultAsync(f => f.Id_produto == id);
+
+                if (compras == null)
+                    throw new Exception("ID não encontrado.");
+
+                return Ok(compras);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetQuantidade")]
+        public async Task<IActionResult> GetByQuantideOrder()
+        {
+            try
+            {
+                List<Compras> compras = await _context
+                 .TB_COMPRAS.OrderBy(c => c.Qunatidade).ToListAsync();
+
+                return Ok(compras);
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetPreco")]
+        public async Task<IActionResult> GetByPreco()
+        {
+            try
+            {
+                List<Compras> compras = await _context
+                 .TB_COMPRAS.OrderBy(c => c.preco_total).ToListAsync();
+
+                return Ok(compras);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetStatus/Andamento")]
+        public async Task<IActionResult> GetByStatusAndamento()
+        {
+            try
+            {
+                List<Compras> compras = await _context
+                 .TB_COMPRAS.Where(c => c.Status == ComprasEnum.Em_Andamento).ToListAsync();
+
+                return Ok(compras);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetStatus/Pagamento")]
+        public async Task<IActionResult> GetByStatusPagamento()
+        {
+            try
+            {
+                List<Compras> compras = await _context
+                 .TB_COMPRAS.Where(c => c.Status == ComprasEnum.Pagamaneto_Pendente).ToListAsync();
+
+                return Ok(compras);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetStatus/Cancelado")]
+        public async Task<IActionResult> GetByStatusCancelado()
+        {
+            try
+            {
+                List<Compras> compras = await _context
+                 .TB_COMPRAS.Where(c => c.Status == ComprasEnum.Cancelado).ToListAsync();
+
+                return Ok(compras);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetStatus/Finalizado")]
+        public async Task<IActionResult> GetByStatusFinalizado()
+        {
+            try
+            {
+                List<Compras> compras = await _context
+                 .TB_COMPRAS.Where(c => c.Status == ComprasEnum.Finalizada).ToListAsync();
+
+                return Ok(compras);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetStatus/Solicitando")]
+        public async Task<IActionResult> GetByStatusSolicitando()
+        {
+            try
+            {
+                List<Compras> compras = await _context
+                 .TB_COMPRAS.Where(c => c.Status == ComprasEnum.Solicitando_Produtos).ToListAsync();
+
+                return Ok(compras);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         #endregion
 
 

@@ -60,24 +60,22 @@ namespace marktplace_sistem.Controllers
             }
         }
 
-        [HttpGet("produto/{produtoId}")]
+        [HttpGet("Produto/{produtoId}")]
         public async Task<IActionResult> GetCategoriaByProdutoId(int produtoId)
         {
             try
             {
-                if (produtoId == 0)
-                {
+                if (produtoId == 0)                
                     throw new Exception("O ID do produto não pode ser igual a zero.");
-                }
+                
 
                 var categoria = await _context.TB_CATEGORIAS
                     .Include(c => c.Produtos)
                     .FirstOrDefaultAsync(c => c.Produtos.Any(p => p.Id == produtoId));
 
-                if (categoria == null)
-                {
+                if (categoria == null)                
                     throw new Exception("Categoria não encontrada para o produto especificado.");
-                }
+                
 
                 return Ok(categoria);
             }
