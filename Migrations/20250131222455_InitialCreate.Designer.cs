@@ -12,7 +12,7 @@ using marktplace_sistem.Data;
 namespace marktplace_sistem.Controllers.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250127210900_InitialCreate")]
+    [Migration("20250131222455_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -93,6 +93,30 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TB_CLIENTES_CPF");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CPF = "23421231231231",
+                            Email = "julian@gmail.com",
+                            Nome = "Julian",
+                            Status = 1,
+                            Telefone = 23312344,
+                            data_Cadastro = new DateTime(2025, 1, 31, 19, 24, 54, 683, DateTimeKind.Local).AddTicks(9367),
+                            data_UltimaCompra = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CPF = "31234212312312",
+                            Email = "thomas@gmail.com",
+                            Nome = "Thomas",
+                            Status = 1,
+                            Telefone = 44233117,
+                            data_Cadastro = new DateTime(2025, 1, 31, 19, 24, 54, 683, DateTimeKind.Local).AddTicks(9650),
+                            data_UltimaCompra = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Clientes_Cnpj", b =>
@@ -124,12 +148,34 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<DateTime>("data_Cadastro")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("data_UltimaCompra")
+                    b.Property<DateTime?>("data_UltimaCompra")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("TB_CLIENTES_CNPJ");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cnpj = "12312312312342",
+                            Email = "jon@gmail.com",
+                            Nome = "Jon",
+                            Status = 1,
+                            Telefone = 23312344,
+                            data_Cadastro = new DateTime(2025, 1, 31, 19, 24, 54, 680, DateTimeKind.Local).AddTicks(9952)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cnpj = "42123123123123",
+                            Email = "bob@gmail.com",
+                            Nome = "Bob",
+                            Status = 1,
+                            Telefone = 44233123,
+                            data_Cadastro = new DateTime(2025, 1, 31, 19, 24, 54, 683, DateTimeKind.Local).AddTicks(6335)
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Compras", b =>
@@ -171,6 +217,32 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasIndex("Id_produto");
 
                     b.ToTable("TB_COMPRAS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Id_fornecedor = 1,
+                            Id_produto = 1,
+                            Qunatidade = 20,
+                            Status = 4,
+                            data_compra = new DateTime(2025, 1, 31, 19, 24, 54, 684, DateTimeKind.Local).AddTicks(610),
+                            preco_Frete = 120.0,
+                            preco_total = 360.0,
+                            preco_unitario = 12.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Id_fornecedor = 2,
+                            Id_produto = 2,
+                            Qunatidade = 36,
+                            Status = 4,
+                            data_compra = new DateTime(2025, 1, 31, 19, 24, 54, 684, DateTimeKind.Local).AddTicks(2681),
+                            preco_Frete = 120.0,
+                            preco_total = 480.0,
+                            preco_unitario = 10.0
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Enderecos", b =>
@@ -233,6 +305,34 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasIndex("Clientes_Cnpj_Id");
 
                     b.ToTable("TB_ENDERECOS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bairro = "Vila Maria",
+                            Cep = 49107174,
+                            Cidade = "São Paulo",
+                            Clientes_CPF_Id = 1,
+                            Complemento = "",
+                            Logradouro = "Av. Guilherme Cottin",
+                            Pais = "Brasil",
+                            UF = "SP",
+                            numero = 62
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bairro = "Centro",
+                            Cep = 74491071,
+                            Cidade = "Sorocaba",
+                            Clientes_Cnpj_Id = 1,
+                            Complemento = "",
+                            Logradouro = "Av. São Pedro ",
+                            Pais = "Brasil",
+                            UF = "SP",
+                            numero = 65
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Estoque", b =>
@@ -261,6 +361,26 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TB_ESTOQUE");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Id_Produto = 1,
+                            Quantidade = 20,
+                            Quantidade_disponivel = 20,
+                            Quantidade_reservada = 0,
+                            Ultima_Atualizacao = new DateTime(2025, 1, 31, 19, 24, 54, 685, DateTimeKind.Local).AddTicks(400)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Id_Produto = 1,
+                            Quantidade = 36,
+                            Quantidade_disponivel = 36,
+                            Quantidade_reservada = 0,
+                            Ultima_Atualizacao = new DateTime(2025, 1, 31, 19, 24, 54, 685, DateTimeKind.Local).AddTicks(663)
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Fornecedor_Produto", b =>
@@ -279,6 +399,20 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasIndex("Id_Produto");
 
                     b.ToTable("TB_FORNECEDOR_PRODUTO");
+
+                    b.HasData(
+                        new
+                        {
+                            Id_Fornecedor = 1,
+                            Id_Produto = 1,
+                            Descricao = "Camisestas com melhor custo beneficios"
+                        },
+                        new
+                        {
+                            Id_Fornecedor = 2,
+                            Id_Produto = 2,
+                            Descricao = "Camisestas de Luxo"
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Fornecedores", b =>
@@ -346,7 +480,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<string>("Motivo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("data_finalizou")
+                    b.Property<DateTime?>("data_finalizou")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("data_inicio")
@@ -363,6 +497,27 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasIndex("Id_produto");
 
                     b.ToTable("TB_HISTORICO_PRECOS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Id_produto = 1,
+                            Motivo = "preço está dando prejuizo a loja",
+                            data_finalizou = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(2649),
+                            data_inicio = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(2344),
+                            preco_base = 20.010000000000002,
+                            preco_venda = 22.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Id_produto = 1,
+                            Motivo = "",
+                            data_inicio = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(3850),
+                            preco_base = 20.010000000000002,
+                            preco_venda = 49.990000000000002
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Impostos", b =>
@@ -391,6 +546,24 @@ namespace marktplace_sistem.Controllers.Migrations
                         .IsUnique();
 
                     b.ToTable("TB_IMPOSTOS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Id_produto = 1,
+                            data_inicio = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(4847),
+                            percentual = 17.0,
+                            status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Id_produto = 2,
+                            data_inicio = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(5594),
+                            percentual = 20.0,
+                            status = true
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Itens_Pedidos", b =>
@@ -407,8 +580,8 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<int>("Id_produto")
                         .HasColumnType("int");
 
-                    b.Property<int>("preco_unitario")
-                        .HasColumnType("int");
+                    b.Property<double>("preco_unitario")
+                        .HasColumnType("float");
 
                     b.Property<int>("quantidade")
                         .HasColumnType("int");
@@ -420,6 +593,24 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasIndex("Id_produto");
 
                     b.ToTable("TB_ITENS_PEDIDOS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Id_pedido = 1,
+                            Id_produto = 1,
+                            preco_unitario = 22.0,
+                            quantidade = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Id_pedido = 1,
+                            Id_produto = 1,
+                            preco_unitario = 49.990000000000002,
+                            quantidade = 1
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Lucros", b =>
@@ -442,14 +633,29 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.Property<double>("preco_custo")
                         .HasColumnType("float");
 
-                    b.Property<double>("preco_unitario")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Id_produto");
 
                     b.ToTable("TB_LUCROS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Id_produto = 1,
+                            data_UltimaAtualizacao = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(1002),
+                            margem_lucro_percentual = 40.0,
+                            preco_custo = 20.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Id_produto = 2,
+                            data_UltimaAtualizacao = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(1749),
+                            margem_lucro_percentual = 36.0,
+                            preco_custo = 15.0
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Pedidos", b =>
@@ -460,7 +666,7 @@ namespace marktplace_sistem.Controllers.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Data_Entrega")
+                    b.Property<DateTime?>("Data_Entrega")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Data_Pedido")
@@ -488,6 +694,30 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasIndex("Id_Cliente_CPF");
 
                     b.ToTable("TB_PEDIDOS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Data_Entrega = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(9414),
+                            Data_Pedido = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(9153),
+                            Forma_Pagamento = 2,
+                            Id_Cliente_CNPJ = 0,
+                            Id_Cliente_CPF = 1,
+                            Preco_Frete = 19.0,
+                            Valor_pedido = 44.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Data_Entrega = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(9957),
+                            Data_Pedido = new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(9954),
+                            Forma_Pagamento = 1,
+                            Id_Cliente_CNPJ = 1,
+                            Id_Cliente_CPF = 0,
+                            Preco_Frete = 10.0,
+                            Valor_pedido = 99.980000000000004
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Precos", b =>
@@ -530,6 +760,34 @@ namespace marktplace_sistem.Controllers.Migrations
                     b.HasIndex("Id_produto");
 
                     b.ToTable("TB_PRECOS");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Id_produto = 1,
+                            Status = 3,
+                            data_fim = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(3443),
+                            data_inicial = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(3179),
+                            data_promo_final = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(4081),
+                            data_promo_inicial = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(3691),
+                            preco_base = 20.010000000000002,
+                            preco_promocional = 21.0,
+                            preco_venda = 22.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Id_produto = 1,
+                            Status = 1,
+                            data_fim = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            data_inicial = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(4894),
+                            data_promo_final = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(4898),
+                            data_promo_inicial = new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(4897),
+                            preco_base = 20.010000000000002,
+                            preco_promocional = 29.989999999999998,
+                            preco_venda = 49.990000000000002
+                        });
                 });
 
             modelBuilder.Entity("marktplace_sistem.models.Produto", b =>

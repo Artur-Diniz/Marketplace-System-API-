@@ -16,6 +16,6 @@ namespace marktplace_sistem.models
         [JsonIgnore]
         public Produto Produto { get; set; }
         public int quantidade { get; set; }
-        public int preco_unitario { get; set; }
+        public double preco_unitario { get; set; }
     }
 }

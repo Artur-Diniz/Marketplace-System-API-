@@ -192,24 +192,57 @@ namespace marktplace_sistem.Data
 
             modelBuilder.Entity<Enderecos>()
                 .Property(e => e.Cep)
-                .HasMaxLength(8) 
+                .HasMaxLength(8)
                 .IsFixedLength()
                 .IsRequired();
 
 
             #region Objetos Base
 
-            modelBuilder.Entity<Produto>().HasData
-            (
-                new Produto { Id = 1, Nome = "Camisa Polo Gola V", Codigo = 100001, Id_categoria = 1, Tamanho = "Médio", Cor = "Preto", Image_Url = "camiseta_polo_Preta.com.br", data_criacao = new DateTime(2025, 01, 15), data_ultimaAlteracao = new DateTime(2025, 01, 15), Produto_Ativo = true },
-                new Produto { Id = 2, Nome = "Camisa Polo", Codigo = 100002, Id_categoria = 1, Tamanho = "Médio", Cor = "Branco", Image_Url = "camiseta_polo_Branca.com.br", data_criacao = new DateTime(2025, 01, 15), data_ultimaAlteracao = new DateTime(2025, 01, 15), Produto_Ativo = true }
 
-            );
             modelBuilder.Entity<Categoria>().HasData
             (
               new Categoria { Id = 1, Nome = "Camisetas", Descricao = "Camisas e camisetas" },
               new Categoria { Id = 2, Nome = "Calcas", Descricao = "Calças e Shorts" }
 
+            );
+
+            modelBuilder.Entity<Clientes_Cnpj>().HasData
+            (
+                new Clientes_Cnpj { Id = 1, Nome = "Jon", Cnpj = "12312312312342", Email = "jon@gmail.com", Status = ClientesEnum.Ativo, Telefone = 23312344, data_Cadastro = DateTime.Now },
+                new Clientes_Cnpj { Id = 2, Nome = "Bob", Cnpj = "42123123123123", Email = "bob@gmail.com", Status = ClientesEnum.Ativo, Telefone = 44233123, data_Cadastro = DateTime.Now }
+            );
+
+
+            modelBuilder.Entity<Clientes_CPF>().HasData
+            (
+                new Clientes_CPF { Id = 1, Nome = "Julian", CPF = "23421231231231", Email = "julian@gmail.com", Status = ClientesEnum.Ativo, Telefone = 23312344, data_Cadastro = DateTime.Now },
+                new Clientes_CPF { Id = 2, Nome = "Thomas", CPF = "31234212312312", Email = "thomas@gmail.com", Status = ClientesEnum.Ativo, Telefone = 44233117, data_Cadastro = DateTime.Now }
+            );
+
+            modelBuilder.Entity<Compras>().HasData
+            (
+                new Compras { Id = 1, data_compra = DateTime.Now, Id_fornecedor = 1, Id_produto = 1, preco_Frete = 120.00, preco_total = 360.00, preco_unitario = 12, Qunatidade = 20, Status = ComprasEnum.Finalizada },
+                new Compras { Id = 2, data_compra = DateTime.Now, Id_fornecedor = 2, Id_produto = 2, preco_Frete = 120.00, preco_total = 480.00, preco_unitario = 10, Qunatidade = 36, Status = ComprasEnum.Finalizada }
+            );
+
+
+            modelBuilder.Entity<Enderecos>().HasData
+            (
+                new Enderecos { Id = 1, Clientes_CPF_Id = 1, Pais = "Brasil", UF = "SP", Cidade = "São Paulo", Bairro = "Vila Maria", Cep = 49107174, Logradouro = "Av. Guilherme Cottin", numero = 62, Complemento = "", },
+                new Enderecos { Id = 2, Clientes_Cnpj_Id = 1, Pais = "Brasil", UF = "SP", Cidade = "Sorocaba", Bairro = "Centro", Cep = 74491071, Logradouro = "Av. São Pedro ", numero = 65, Complemento = "", }
+            );
+
+            modelBuilder.Entity<Estoque>().HasData
+            (
+                new Estoque { Id = 1, Id_Produto = 1, Quantidade = 20, Quantidade_disponivel = 20, Quantidade_reservada = 0, Ultima_Atualizacao = DateTime.Now },
+                new Estoque { Id = 2, Id_Produto = 1, Quantidade = 36, Quantidade_disponivel = 36, Quantidade_reservada = 0, Ultima_Atualizacao = DateTime.Now }
+            );
+
+            modelBuilder.Entity<Fornecedor_Produto>().HasData
+            (
+             new Fornecedor_Produto() { Id_Fornecedor = 1, Id_Produto = 1, Descricao = "Camisestas com melhor custo beneficios" },
+             new Fornecedor_Produto() { Id_Fornecedor = 2, Id_Produto = 2, Descricao = "Camisestas de Luxo" }
             );
 
             modelBuilder.Entity<Fornecedores>().HasData
@@ -218,6 +251,54 @@ namespace marktplace_sistem.Data
              new Fornecedores() { Id = 2, cnpj = "32132132132123", Nome = "Jonathan", Email = "Jonathan@gmail.com", Telefone = 1124311743, Fornecedor_Ativo = true, Fornecedor_Produto = new List<Fornecedor_Produto> { } }
             );
 
+            modelBuilder.Entity<Historico_precos>().HasData
+            (
+                new Historico_precos() { Id = 1, Id_produto = 1, data_inicio = DateTime.Now, data_finalizou = DateTime.Now, Motivo = "preço está dando prejuizo a loja", preco_base = 20.01, preco_venda = 22.00 },
+                new Historico_precos() { Id = 2, Id_produto = 1, data_inicio = DateTime.Now, preco_base = 20.01, preco_venda = 49.99 }
+            );
+
+
+            modelBuilder.Entity<Impostos>().HasData
+            (
+                new Impostos() { Id = 1, Id_produto = 1, data_inicio = DateTime.Now, percentual = 17, status = true },
+                new Impostos() { Id = 2, Id_produto = 2, data_inicio = DateTime.Now, percentual = 20, status = true }
+            );
+
+
+            modelBuilder.Entity<Itens_Pedidos>().HasData
+            (
+                new Itens_Pedidos() { Id = 1, Id_produto = 1, Id_pedido = 1, preco_unitario = 22.00, quantidade = 2 },
+                new Itens_Pedidos() { Id = 2, Id_produto = 1, Id_pedido = 1, preco_unitario = 49.99, quantidade = 1 }
+
+            );
+
+            modelBuilder.Entity<Pedidos>().HasData
+            (
+                new Pedidos() { Id = 1, Id_Cliente_CPF = 1, Id_Cliente_CNPJ = 0, Valor_pedido = 44.00, Preco_Frete = 19.00, Data_Pedido = DateTime.Now, Data_Entrega = DateTime.Now, Forma_Pagamento = PedidosEnum.Credito },
+                new Pedidos() { Id = 2, Id_Cliente_CPF = 0, Id_Cliente_CNPJ = 1, Valor_pedido = 99.98, Preco_Frete = 10.00, Data_Pedido = DateTime.Now, Data_Entrega = DateTime.Now, Forma_Pagamento = PedidosEnum.Pix }
+
+            );
+
+
+            modelBuilder.Entity<Lucros>().HasData
+            (
+                new Lucros() { Id = 1, Id_produto = 1, data_UltimaAtualizacao = DateTime.Now, margem_lucro_percentual = 40, preco_custo = 20.00, },
+                new Lucros() { Id = 2, Id_produto = 2, data_UltimaAtualizacao = DateTime.Now, margem_lucro_percentual = 36, preco_custo = 15.00, }
+            );
+
+            modelBuilder.Entity<Precos>().HasData
+            (
+                new Precos() { Id = 1, Id_produto = 1, preco_base = 20.01, preco_venda = 22.00, data_inicial = DateTime.Now, data_fim = DateTime.Now, data_promo_inicial = DateTime.Now, data_promo_final = DateTime.Now, preco_promocional = 21.00, Status = PrecosEnum.Intativo },
+                new Precos() { Id = 2, Id_produto = 1, preco_base = 20.01, preco_venda = 49.99, data_inicial = DateTime.Now, data_promo_inicial = DateTime.Now, data_promo_final = DateTime.Now, preco_promocional = 29.99, Status = PrecosEnum.Ativo }
+
+            );
+
+            modelBuilder.Entity<Produto>().HasData
+            (
+                new Produto { Id = 1, Nome = "Camisa Polo Gola V", Codigo = 100001, Id_categoria = 1, Tamanho = "Médio", Cor = "Preto", Image_Url = "camiseta_polo_Preta.com.br", data_criacao = new DateTime(2025, 01, 15), data_ultimaAlteracao = new DateTime(2025, 01, 15), Produto_Ativo = true },
+                new Produto { Id = 2, Nome = "Camisa Polo", Codigo = 100002, Id_categoria = 1, Tamanho = "Médio", Cor = "Branco", Image_Url = "camiseta_polo_Branca.com.br", data_criacao = new DateTime(2025, 01, 15), data_ultimaAlteracao = new DateTime(2025, 01, 15), Produto_Ativo = true }
+
+            );
             #endregion
         }
 

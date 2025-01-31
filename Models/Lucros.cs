@@ -11,7 +11,6 @@ namespace marktplace_sistem.models
         [JsonIgnore]
         public Produto Produto { get; set; }
         public double preco_custo { get; set; }
-        public double preco_unitario { get; set; }
         public double margem_lucro_percentual { get; set; }
         public DateTime data_UltimaAtualizacao { get; set; }
 

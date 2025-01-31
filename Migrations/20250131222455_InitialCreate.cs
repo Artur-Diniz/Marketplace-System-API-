@@ -38,7 +38,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telefone = table.Column<int>(type: "int", nullable: false),
                     data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    data_UltimaCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    data_UltimaCompra = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -155,7 +155,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     Id_Cliente_CNPJ = table.Column<int>(type: "int", nullable: true),
                     Preco_Frete = table.Column<double>(type: "float", nullable: false),
                     Data_Pedido = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Data_Entrega = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Data_Entrega = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Valor_pedido = table.Column<double>(type: "float", nullable: false),
                     Forma_Pagamento = table.Column<int>(type: "int", nullable: false)
                 },
@@ -277,7 +277,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     preco_base = table.Column<double>(type: "float", nullable: false),
                     preco_venda = table.Column<double>(type: "float", nullable: false),
                     data_inicio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    data_finalizou = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    data_finalizou = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Motivo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -322,7 +322,7 @@ namespace marktplace_sistem.Controllers.Migrations
                     Id_pedido = table.Column<int>(type: "int", nullable: false),
                     Id_produto = table.Column<int>(type: "int", nullable: false),
                     quantidade = table.Column<int>(type: "int", nullable: false),
-                    preco_unitario = table.Column<int>(type: "int", nullable: false)
+                    preco_unitario = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -349,7 +349,6 @@ namespace marktplace_sistem.Controllers.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Id_produto = table.Column<int>(type: "int", nullable: false),
                     preco_custo = table.Column<double>(type: "float", nullable: false),
-                    preco_unitario = table.Column<double>(type: "float", nullable: false),
                     margem_lucro_percentual = table.Column<double>(type: "float", nullable: false),
                     data_UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -401,6 +400,33 @@ namespace marktplace_sistem.Controllers.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "TB_CLIENTES_CNPJ",
+                columns: new[] { "Id", "Cnpj", "Email", "Nome", "Status", "Telefone", "data_Cadastro", "data_UltimaCompra" },
+                values: new object[,]
+                {
+                    { 1, "12312312312342", "jon@gmail.com", "Jon", 1, 23312344, new DateTime(2025, 1, 31, 19, 24, 54, 680, DateTimeKind.Local).AddTicks(9952), null },
+                    { 2, "42123123123123", "bob@gmail.com", "Bob", 1, 44233123, new DateTime(2025, 1, 31, 19, 24, 54, 683, DateTimeKind.Local).AddTicks(6335), null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_CLIENTES_CPF",
+                columns: new[] { "Id", "CPF", "Email", "Nome", "Status", "Telefone", "data_Cadastro", "data_UltimaCompra" },
+                values: new object[,]
+                {
+                    { 1, "23421231231231", "julian@gmail.com", "Julian", 1, 23312344, new DateTime(2025, 1, 31, 19, 24, 54, 683, DateTimeKind.Local).AddTicks(9367), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "31234212312312", "thomas@gmail.com", "Thomas", 1, 44233117, new DateTime(2025, 1, 31, 19, 24, 54, 683, DateTimeKind.Local).AddTicks(9650), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_ESTOQUE",
+                columns: new[] { "Id", "Id_Produto", "Quantidade", "Quantidade_disponivel", "Quantidade_reservada", "Ultima_Atualizacao" },
+                values: new object[,]
+                {
+                    { 1, 1, 20, 20, 0, new DateTime(2025, 1, 31, 19, 24, 54, 685, DateTimeKind.Local).AddTicks(400) },
+                    { 2, 1, 36, 36, 0, new DateTime(2025, 1, 31, 19, 24, 54, 685, DateTimeKind.Local).AddTicks(663) }
+                });
+
+            migrationBuilder.InsertData(
                 table: "TB_FORNECEDORES",
                 columns: new[] { "Id", "Email", "Fornecedor_Ativo", "Nome", "Telefone", "cnpj" },
                 values: new object[,]
@@ -410,12 +436,93 @@ namespace marktplace_sistem.Controllers.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "TB_ENDERECOS",
+                columns: new[] { "Id", "Bairro", "Cep", "Cidade", "Clientes_CPFId", "Clientes_CPF_Id", "Clientes_CnpjId", "Clientes_Cnpj_Id", "Complemento", "Logradouro", "Pais", "UF", "numero" },
+                values: new object[,]
+                {
+                    { 1, "Vila Maria", 49107174, "São Paulo", null, 1, null, null, "", "Av. Guilherme Cottin", "Brasil", "SP", 62 },
+                    { 2, "Centro", 74491071, "Sorocaba", null, null, null, 1, "", "Av. São Pedro ", "Brasil", "SP", 65 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_PEDIDOS",
+                columns: new[] { "Id", "Data_Entrega", "Data_Pedido", "Forma_Pagamento", "Id_Cliente_CNPJ", "Id_Cliente_CPF", "Preco_Frete", "Valor_pedido" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(9414), new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(9153), 2, 0, 1, 19.0, 44.0 },
+                    { 2, new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(9957), new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(9954), 1, 1, 0, 10.0, 99.980000000000004 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "TB_PRODUTOS",
                 columns: new[] { "Id", "Codigo", "Cor", "Id_Estoque", "Id_categoria", "Image_Url", "Nome", "Produto_Ativo", "Tamanho", "data_criacao", "data_ultimaAlteracao" },
                 values: new object[,]
                 {
                     { 1, 100001, "Preto", 0, 1, "camiseta_polo_Preta.com.br", "Camisa Polo Gola V", true, "Médio", new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 2, 100002, "Branco", 0, 1, "camiseta_polo_Branca.com.br", "Camisa Polo", true, "Médio", new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_COMPRAS",
+                columns: new[] { "Id", "Id_fornecedor", "Id_produto", "Qunatidade", "Status", "data_compra", "preco_Frete", "preco_total", "preco_unitario" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, 20, 4, new DateTime(2025, 1, 31, 19, 24, 54, 684, DateTimeKind.Local).AddTicks(610), 120.0, 360.0, 12.0 },
+                    { 2, 2, 2, 36, 4, new DateTime(2025, 1, 31, 19, 24, 54, 684, DateTimeKind.Local).AddTicks(2681), 120.0, 480.0, 10.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_FORNECEDOR_PRODUTO",
+                columns: new[] { "Id_Fornecedor", "Id_Produto", "Descricao" },
+                values: new object[,]
+                {
+                    { 1, 1, "Camisestas com melhor custo beneficios" },
+                    { 2, 2, "Camisestas de Luxo" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_HISTORICO_PRECOS",
+                columns: new[] { "Id", "Id_produto", "Motivo", "data_finalizou", "data_inicio", "preco_base", "preco_venda" },
+                values: new object[,]
+                {
+                    { 1, 1, "preço está dando prejuizo a loja", new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(2649), new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(2344), 20.010000000000002, 22.0 },
+                    { 2, 1, "", null, new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(3850), 20.010000000000002, 49.990000000000002 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_IMPOSTOS",
+                columns: new[] { "Id", "Id_produto", "data_inicio", "percentual", "status" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(4847), 17.0, true },
+                    { 2, 2, new DateTime(2025, 1, 31, 19, 24, 54, 686, DateTimeKind.Local).AddTicks(5594), 20.0, true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_ITENS_PEDIDOS",
+                columns: new[] { "Id", "Id_pedido", "Id_produto", "preco_unitario", "quantidade" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, 22.0, 2 },
+                    { 2, 1, 1, 49.990000000000002, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_LUCROS",
+                columns: new[] { "Id", "Id_produto", "data_UltimaAtualizacao", "margem_lucro_percentual", "preco_custo" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(1002), 40.0, 20.0 },
+                    { 2, 2, new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(1749), 36.0, 15.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TB_PRECOS",
+                columns: new[] { "Id", "Id_produto", "Status", "data_fim", "data_inicial", "data_promo_final", "data_promo_inicial", "preco_base", "preco_promocional", "preco_venda" },
+                values: new object[,]
+                {
+                    { 1, 1, 3, new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(3443), new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(3179), new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(4081), new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(3691), 20.010000000000002, 21.0, 22.0 },
+                    { 2, 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(4894), new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(4898), new DateTime(2025, 1, 31, 19, 24, 54, 687, DateTimeKind.Local).AddTicks(4897), 20.010000000000002, 29.989999999999998, 49.990000000000002 }
                 });
 
             migrationBuilder.CreateIndex(

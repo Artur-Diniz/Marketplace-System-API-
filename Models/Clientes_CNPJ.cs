@@ -12,7 +12,7 @@ namespace marktplace_sistem.models
         public string Email { get; set; } = string.Empty;
         public int Telefone { get; set; }
         public DateTime data_Cadastro { get; set; }
-        public DateTime data_UltimaCompra { get; set; }
+        public DateTime? data_UltimaCompra { get; set; }
         public ICollection<Enderecos> Enderecos { get; set; }
 
 

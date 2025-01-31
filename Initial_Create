@@ -23,7 +23,7 @@ CREATE TABLE [TB_CLIENTES_CNPJ] (
     [Email] nvarchar(max) NULL,
     [Telefone] int NOT NULL,
     [data_Cadastro] datetime2 NOT NULL,
-    [data_UltimaCompra] datetime2 NOT NULL,
+    [data_UltimaCompra] datetime2 NULL,
     [Status] int NOT NULL,
     CONSTRAINT [PK_TB_CLIENTES_CNPJ] PRIMARY KEY ([Id])
 );
@@ -87,7 +87,7 @@ CREATE TABLE [TB_PEDIDOS] (
     [Id_Cliente_CNPJ] int NULL,
     [Preco_Frete] float NOT NULL,
     [Data_Pedido] datetime2 NOT NULL,
-    [Data_Entrega] datetime2 NOT NULL,
+    [Data_Entrega] datetime2 NULL,
     [Valor_pedido] float NOT NULL,
     [Forma_Pagamento] int NOT NULL,
     CONSTRAINT [PK_TB_PEDIDOS] PRIMARY KEY ([Id]),
@@ -142,7 +142,7 @@ CREATE TABLE [TB_HISTORICO_PRECOS] (
     [preco_base] float NOT NULL,
     [preco_venda] float NOT NULL,
     [data_inicio] datetime2 NOT NULL,
-    [data_finalizou] datetime2 NOT NULL,
+    [data_finalizou] datetime2 NULL,
     [Motivo] nvarchar(max) NULL,
     CONSTRAINT [PK_TB_HISTORICO_PRECOS] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_TB_HISTORICO_PRECOS_TB_PRODUTOS_Id_produto] FOREIGN KEY ([Id_produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
@@ -163,7 +163,7 @@ CREATE TABLE [TB_ITENS_PEDIDOS] (
     [Id_pedido] int NOT NULL,
     [Id_produto] int NOT NULL,
     [quantidade] int NOT NULL,
-    [preco_unitario] int NOT NULL,
+    [preco_unitario] float NOT NULL,
     CONSTRAINT [PK_TB_ITENS_PEDIDOS] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_TB_ITENS_PEDIDOS_TB_PEDIDOS_Id_pedido] FOREIGN KEY ([Id_pedido]) REFERENCES [TB_PEDIDOS] ([Id]) ON DELETE CASCADE,
     CONSTRAINT [FK_TB_ITENS_PEDIDOS_TB_PRODUTOS_Id_produto] FOREIGN KEY ([Id_produto]) REFERENCES [TB_PRODUTOS] ([Id]) ON DELETE CASCADE
@@ -173,7 +173,6 @@ CREATE TABLE [TB_LUCROS] (
     [Id] int NOT NULL IDENTITY,
     [Id_produto] int NOT NULL,
     [preco_custo] float NOT NULL,
-    [preco_unitario] float NOT NULL,
     [margem_lucro_percentual] float NOT NULL,
     [data_UltimaAtualizacao] datetime2 NOT NULL,
     CONSTRAINT [PK_TB_LUCROS] PRIMARY KEY ([Id]),
@@ -203,6 +202,30 @@ VALUES (1, N'Camisas e camisetas', N'Camisetas'),
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Descricao', N'Nome') AND [object_id] = OBJECT_ID(N'[TB_CATEGORIAS]'))
     SET IDENTITY_INSERT [TB_CATEGORIAS] OFF;
 
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Cnpj', N'Email', N'Nome', N'Status', N'Telefone', N'data_Cadastro', N'data_UltimaCompra') AND [object_id] = OBJECT_ID(N'[TB_CLIENTES_CNPJ]'))
+    SET IDENTITY_INSERT [TB_CLIENTES_CNPJ] ON;
+INSERT INTO [TB_CLIENTES_CNPJ] ([Id], [Cnpj], [Email], [Nome], [Status], [Telefone], [data_Cadastro], [data_UltimaCompra])
+VALUES (1, N'12312312312342', N'jon@gmail.com', N'Jon', 1, 23312344, '2025-01-31T19:24:54.6809952-03:00', NULL),
+(2, N'42123123123123', N'bob@gmail.com', N'Bob', 1, 44233123, '2025-01-31T19:24:54.6836335-03:00', NULL);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Cnpj', N'Email', N'Nome', N'Status', N'Telefone', N'data_Cadastro', N'data_UltimaCompra') AND [object_id] = OBJECT_ID(N'[TB_CLIENTES_CNPJ]'))
+    SET IDENTITY_INSERT [TB_CLIENTES_CNPJ] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CPF', N'Email', N'Nome', N'Status', N'Telefone', N'data_Cadastro', N'data_UltimaCompra') AND [object_id] = OBJECT_ID(N'[TB_CLIENTES_CPF]'))
+    SET IDENTITY_INSERT [TB_CLIENTES_CPF] ON;
+INSERT INTO [TB_CLIENTES_CPF] ([Id], [CPF], [Email], [Nome], [Status], [Telefone], [data_Cadastro], [data_UltimaCompra])
+VALUES (1, N'23421231231231', N'julian@gmail.com', N'Julian', 1, 23312344, '2025-01-31T19:24:54.6839367-03:00', '0001-01-01T00:00:00.0000000'),
+(2, N'31234212312312', N'thomas@gmail.com', N'Thomas', 1, 44233117, '2025-01-31T19:24:54.6839650-03:00', '0001-01-01T00:00:00.0000000');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CPF', N'Email', N'Nome', N'Status', N'Telefone', N'data_Cadastro', N'data_UltimaCompra') AND [object_id] = OBJECT_ID(N'[TB_CLIENTES_CPF]'))
+    SET IDENTITY_INSERT [TB_CLIENTES_CPF] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_Produto', N'Quantidade', N'Quantidade_disponivel', N'Quantidade_reservada', N'Ultima_Atualizacao') AND [object_id] = OBJECT_ID(N'[TB_ESTOQUE]'))
+    SET IDENTITY_INSERT [TB_ESTOQUE] ON;
+INSERT INTO [TB_ESTOQUE] ([Id], [Id_Produto], [Quantidade], [Quantidade_disponivel], [Quantidade_reservada], [Ultima_Atualizacao])
+VALUES (1, 1, 20, 20, 0, '2025-01-31T19:24:54.6850400-03:00'),
+(2, 1, 36, 36, 0, '2025-01-31T19:24:54.6850663-03:00');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_Produto', N'Quantidade', N'Quantidade_disponivel', N'Quantidade_reservada', N'Ultima_Atualizacao') AND [object_id] = OBJECT_ID(N'[TB_ESTOQUE]'))
+    SET IDENTITY_INSERT [TB_ESTOQUE] OFF;
+
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Email', N'Fornecedor_Ativo', N'Nome', N'Telefone', N'cnpj') AND [object_id] = OBJECT_ID(N'[TB_FORNECEDORES]'))
     SET IDENTITY_INSERT [TB_FORNECEDORES] ON;
 INSERT INTO [TB_FORNECEDORES] ([Id], [Email], [Fornecedor_Ativo], [Nome], [Telefone], [cnpj])
@@ -211,6 +234,22 @@ VALUES (1, N'jonas@gmail.com', CAST(1 AS bit), N'Jonas', 1124311717, N'123123123
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Email', N'Fornecedor_Ativo', N'Nome', N'Telefone', N'cnpj') AND [object_id] = OBJECT_ID(N'[TB_FORNECEDORES]'))
     SET IDENTITY_INSERT [TB_FORNECEDORES] OFF;
 
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Bairro', N'Cep', N'Cidade', N'Clientes_CPFId', N'Clientes_CPF_Id', N'Clientes_CnpjId', N'Clientes_Cnpj_Id', N'Complemento', N'Logradouro', N'Pais', N'UF', N'numero') AND [object_id] = OBJECT_ID(N'[TB_ENDERECOS]'))
+    SET IDENTITY_INSERT [TB_ENDERECOS] ON;
+INSERT INTO [TB_ENDERECOS] ([Id], [Bairro], [Cep], [Cidade], [Clientes_CPFId], [Clientes_CPF_Id], [Clientes_CnpjId], [Clientes_Cnpj_Id], [Complemento], [Logradouro], [Pais], [UF], [numero])
+VALUES (1, N'Vila Maria', 49107174, N'São Paulo', NULL, 1, NULL, NULL, N'', N'Av. Guilherme Cottin', N'Brasil', N'SP', 62),
+(2, N'Centro', 74491071, N'Sorocaba', NULL, NULL, NULL, 1, N'', N'Av. São Pedro ', N'Brasil', N'SP', 65);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Bairro', N'Cep', N'Cidade', N'Clientes_CPFId', N'Clientes_CPF_Id', N'Clientes_CnpjId', N'Clientes_Cnpj_Id', N'Complemento', N'Logradouro', N'Pais', N'UF', N'numero') AND [object_id] = OBJECT_ID(N'[TB_ENDERECOS]'))
+    SET IDENTITY_INSERT [TB_ENDERECOS] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Data_Entrega', N'Data_Pedido', N'Forma_Pagamento', N'Id_Cliente_CNPJ', N'Id_Cliente_CPF', N'Preco_Frete', N'Valor_pedido') AND [object_id] = OBJECT_ID(N'[TB_PEDIDOS]'))
+    SET IDENTITY_INSERT [TB_PEDIDOS] ON;
+INSERT INTO [TB_PEDIDOS] ([Id], [Data_Entrega], [Data_Pedido], [Forma_Pagamento], [Id_Cliente_CNPJ], [Id_Cliente_CPF], [Preco_Frete], [Valor_pedido])
+VALUES (1, '2025-01-31T19:24:54.6869414-03:00', '2025-01-31T19:24:54.6869153-03:00', 2, 0, 1, 19.0E0, 44.0E0),
+(2, '2025-01-31T19:24:54.6869957-03:00', '2025-01-31T19:24:54.6869954-03:00', 1, 1, 0, 10.0E0, 99.980000000000004E0);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Data_Entrega', N'Data_Pedido', N'Forma_Pagamento', N'Id_Cliente_CNPJ', N'Id_Cliente_CPF', N'Preco_Frete', N'Valor_pedido') AND [object_id] = OBJECT_ID(N'[TB_PEDIDOS]'))
+    SET IDENTITY_INSERT [TB_PEDIDOS] OFF;
+
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Codigo', N'Cor', N'Id_Estoque', N'Id_categoria', N'Image_Url', N'Nome', N'Produto_Ativo', N'Tamanho', N'data_criacao', N'data_ultimaAlteracao') AND [object_id] = OBJECT_ID(N'[TB_PRODUTOS]'))
     SET IDENTITY_INSERT [TB_PRODUTOS] ON;
 INSERT INTO [TB_PRODUTOS] ([Id], [Codigo], [Cor], [Id_Estoque], [Id_categoria], [Image_Url], [Nome], [Produto_Ativo], [Tamanho], [data_criacao], [data_ultimaAlteracao])
@@ -218,6 +257,62 @@ VALUES (1, 100001, N'Preto', 0, 1, N'camiseta_polo_Preta.com.br', N'Camisa Polo 
 (2, 100002, N'Branco', 0, 1, N'camiseta_polo_Branca.com.br', N'Camisa Polo', CAST(1 AS bit), N'Médio', '2025-01-15T00:00:00.0000000', '2025-01-15T00:00:00.0000000');
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Codigo', N'Cor', N'Id_Estoque', N'Id_categoria', N'Image_Url', N'Nome', N'Produto_Ativo', N'Tamanho', N'data_criacao', N'data_ultimaAlteracao') AND [object_id] = OBJECT_ID(N'[TB_PRODUTOS]'))
     SET IDENTITY_INSERT [TB_PRODUTOS] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_fornecedor', N'Id_produto', N'Qunatidade', N'Status', N'data_compra', N'preco_Frete', N'preco_total', N'preco_unitario') AND [object_id] = OBJECT_ID(N'[TB_COMPRAS]'))
+    SET IDENTITY_INSERT [TB_COMPRAS] ON;
+INSERT INTO [TB_COMPRAS] ([Id], [Id_fornecedor], [Id_produto], [Qunatidade], [Status], [data_compra], [preco_Frete], [preco_total], [preco_unitario])
+VALUES (1, 1, 1, 20, 4, '2025-01-31T19:24:54.6840610-03:00', 120.0E0, 360.0E0, 12.0E0),
+(2, 2, 2, 36, 4, '2025-01-31T19:24:54.6842681-03:00', 120.0E0, 480.0E0, 10.0E0);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_fornecedor', N'Id_produto', N'Qunatidade', N'Status', N'data_compra', N'preco_Frete', N'preco_total', N'preco_unitario') AND [object_id] = OBJECT_ID(N'[TB_COMPRAS]'))
+    SET IDENTITY_INSERT [TB_COMPRAS] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id_Fornecedor', N'Id_Produto', N'Descricao') AND [object_id] = OBJECT_ID(N'[TB_FORNECEDOR_PRODUTO]'))
+    SET IDENTITY_INSERT [TB_FORNECEDOR_PRODUTO] ON;
+INSERT INTO [TB_FORNECEDOR_PRODUTO] ([Id_Fornecedor], [Id_Produto], [Descricao])
+VALUES (1, 1, N'Camisestas com melhor custo beneficios'),
+(2, 2, N'Camisestas de Luxo');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id_Fornecedor', N'Id_Produto', N'Descricao') AND [object_id] = OBJECT_ID(N'[TB_FORNECEDOR_PRODUTO]'))
+    SET IDENTITY_INSERT [TB_FORNECEDOR_PRODUTO] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_produto', N'Motivo', N'data_finalizou', N'data_inicio', N'preco_base', N'preco_venda') AND [object_id] = OBJECT_ID(N'[TB_HISTORICO_PRECOS]'))
+    SET IDENTITY_INSERT [TB_HISTORICO_PRECOS] ON;
+INSERT INTO [TB_HISTORICO_PRECOS] ([Id], [Id_produto], [Motivo], [data_finalizou], [data_inicio], [preco_base], [preco_venda])
+VALUES (1, 1, N'preço está dando prejuizo a loja', '2025-01-31T19:24:54.6862649-03:00', '2025-01-31T19:24:54.6862344-03:00', 20.010000000000002E0, 22.0E0),
+(2, 1, N'', NULL, '2025-01-31T19:24:54.6863850-03:00', 20.010000000000002E0, 49.990000000000002E0);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_produto', N'Motivo', N'data_finalizou', N'data_inicio', N'preco_base', N'preco_venda') AND [object_id] = OBJECT_ID(N'[TB_HISTORICO_PRECOS]'))
+    SET IDENTITY_INSERT [TB_HISTORICO_PRECOS] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_produto', N'data_inicio', N'percentual', N'status') AND [object_id] = OBJECT_ID(N'[TB_IMPOSTOS]'))
+    SET IDENTITY_INSERT [TB_IMPOSTOS] ON;
+INSERT INTO [TB_IMPOSTOS] ([Id], [Id_produto], [data_inicio], [percentual], [status])
+VALUES (1, 1, '2025-01-31T19:24:54.6864847-03:00', 17.0E0, CAST(1 AS bit)),
+(2, 2, '2025-01-31T19:24:54.6865594-03:00', 20.0E0, CAST(1 AS bit));
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_produto', N'data_inicio', N'percentual', N'status') AND [object_id] = OBJECT_ID(N'[TB_IMPOSTOS]'))
+    SET IDENTITY_INSERT [TB_IMPOSTOS] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_pedido', N'Id_produto', N'preco_unitario', N'quantidade') AND [object_id] = OBJECT_ID(N'[TB_ITENS_PEDIDOS]'))
+    SET IDENTITY_INSERT [TB_ITENS_PEDIDOS] ON;
+INSERT INTO [TB_ITENS_PEDIDOS] ([Id], [Id_pedido], [Id_produto], [preco_unitario], [quantidade])
+VALUES (1, 1, 1, 22.0E0, 2),
+(2, 1, 1, 49.990000000000002E0, 1);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_pedido', N'Id_produto', N'preco_unitario', N'quantidade') AND [object_id] = OBJECT_ID(N'[TB_ITENS_PEDIDOS]'))
+    SET IDENTITY_INSERT [TB_ITENS_PEDIDOS] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_produto', N'data_UltimaAtualizacao', N'margem_lucro_percentual', N'preco_custo') AND [object_id] = OBJECT_ID(N'[TB_LUCROS]'))
+    SET IDENTITY_INSERT [TB_LUCROS] ON;
+INSERT INTO [TB_LUCROS] ([Id], [Id_produto], [data_UltimaAtualizacao], [margem_lucro_percentual], [preco_custo])
+VALUES (1, 1, '2025-01-31T19:24:54.6871002-03:00', 40.0E0, 20.0E0),
+(2, 2, '2025-01-31T19:24:54.6871749-03:00', 36.0E0, 15.0E0);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_produto', N'data_UltimaAtualizacao', N'margem_lucro_percentual', N'preco_custo') AND [object_id] = OBJECT_ID(N'[TB_LUCROS]'))
+    SET IDENTITY_INSERT [TB_LUCROS] OFF;
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_produto', N'Status', N'data_fim', N'data_inicial', N'data_promo_final', N'data_promo_inicial', N'preco_base', N'preco_promocional', N'preco_venda') AND [object_id] = OBJECT_ID(N'[TB_PRECOS]'))
+    SET IDENTITY_INSERT [TB_PRECOS] ON;
+INSERT INTO [TB_PRECOS] ([Id], [Id_produto], [Status], [data_fim], [data_inicial], [data_promo_final], [data_promo_inicial], [preco_base], [preco_promocional], [preco_venda])
+VALUES (1, 1, 3, '2025-01-31T19:24:54.6873443-03:00', '2025-01-31T19:24:54.6873179-03:00', '2025-01-31T19:24:54.6874081-03:00', '2025-01-31T19:24:54.6873691-03:00', 20.010000000000002E0, 21.0E0, 22.0E0),
+(2, 1, 1, '0001-01-01T00:00:00.0000000', '2025-01-31T19:24:54.6874894-03:00', '2025-01-31T19:24:54.6874898-03:00', '2025-01-31T19:24:54.6874897-03:00', 20.010000000000002E0, 29.989999999999998E0, 49.990000000000002E0);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Id_produto', N'Status', N'data_fim', N'data_inicial', N'data_promo_final', N'data_promo_inicial', N'preco_base', N'preco_promocional', N'preco_venda') AND [object_id] = OBJECT_ID(N'[TB_PRECOS]'))
+    SET IDENTITY_INSERT [TB_PRECOS] OFF;
 
 CREATE INDEX [IX_TB_COMPRAS_Id_fornecedor] ON [TB_COMPRAS] ([Id_fornecedor]);
 
@@ -254,7 +349,7 @@ CREATE INDEX [IX_TB_PRODUTOS_Id_categoria] ON [TB_PRODUTOS] ([Id_categoria]);
 CREATE UNIQUE INDEX [IX_TB_PRODUTOS_Id_Estoque] ON [TB_PRODUTOS] ([Id_Estoque]);
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20250127210900_InitialCreate', N'9.0.1');
+VALUES (N'20250131222455_InitialCreate', N'9.0.1');
 
 COMMIT;
 GO
